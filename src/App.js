@@ -28,16 +28,16 @@ function App() {
 
         <Routes>
           <Route exact path='/' element={<Home />}></Route>
-          <Route exact path='/Home' element={<Home />}></Route>
-          <Route exact path='/Shop' element={<Shop />}></Route>
-          <Route exact path='/About' element={<About />}></Route>
-          <Route exact path='/Login' element={<Login />}></Route>
-          <Route exact path='/Cart' element={<Cart />}></Route>
-          <Route exact path='/Dashboard' element={<Dashboard />}></Route>
-          <Route exact path='/Register' element={<Register />}></Route>
-          <Route exact path='/Login' element={<Login />}></Route>
-          <Route exact path='/Orderstatus' element={<User />}></Route>
-          <Route exact path='/Update' element={<Update />}></Route>
+          <Route exact path='/home' element={<Home />}></Route>
+          <Route exact path='/shop' element={<Shop />}></Route>
+          <Route exact path='/about' element={<About />}></Route>
+          <Route exact path='/login' element={<Login />}></Route>
+          <Route exact path='/cart' element={<Cart />}></Route>
+          <Route exact path='/dashboard' element={<Dashboard />}></Route>
+          <Route exact path='/register' element={<Register />}></Route>
+          <Route exact path='/login' element={<Login />}></Route>
+          <Route exact path='/orderstatus' element={<User />}></Route>
+          <Route exact path='/update' element={<Update />}></Route>
 
 
         </Routes>

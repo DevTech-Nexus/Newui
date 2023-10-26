@@ -147,10 +147,6 @@ export default function Login() {
           </div> */}
 
 
-            <div className="divider d-flex align-items-center my-4">
-              <p className="text-center fw-bold mx-3 mb-0">OR</p>
-            </div>
-
           </MDBCol>
 
         </MDBRow>
