@@ -1,8 +1,6 @@
 import {
-  MDBBtn,
   MDBCol,
   MDBContainer,
-  MDBIcon,
   MDBInput,
   MDBRow
 } from 'mdb-react-ui-kit';
