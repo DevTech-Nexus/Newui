@@ -13,12 +13,6 @@ export default function Navigationbar(){
   const location = useLocation();
 
   // Hide navbar on the login page and Login page
-  if (location.pathname === '/Dashboard' || location.pathname === '/Login') {
-    return null;
-  }
-  else if (location.pathname === '/Register' || location.pathname === '/Login') {
-    return null;
-  }
   
 
   return (
