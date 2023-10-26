@@ -27,17 +27,17 @@ function App() {
         <Navigationbar />
 
         <Routes>
-          <Route exact path='/' element={<Home />}></Route>
-          <Route exact path='/home' element={<Home />}></Route>
-          <Route exact path='/shop' element={<Shop />}></Route>
-          <Route exact path='/about' element={<About />}></Route>
-          <Route exact path='/login' element={<Login />}></Route>
-          <Route exact path='/cart' element={<Cart />}></Route>
-          <Route exact path='/dashboard' element={<Dashboard />}></Route>
-          <Route exact path='/register' element={<Register />}></Route>
-          <Route exact path='/login' element={<Login />}></Route>
-          <Route exact path='/orderstatus' element={<User />}></Route>
-          <Route exact path='/update' element={<Update />}></Route>
+          <Route  path='/' element={<Home />}></Route>
+          <Route  path='/home' element={<Home />}></Route>
+          <Route  path='/shop' element={<Shop />}></Route>
+          <Route  path='/about' element={<About />}></Route>
+          <Route  path='/login' element={<Login />}></Route>
+          <Route  path='/cart' element={<Cart />}></Route>
+          <Route  path='/dashboard' element={<Dashboard />}></Route>
+          <Route  path='/register' element={<Register />}></Route>
+          <Route  path='/login' element={<Login />}></Route>
+          <Route  path='/orderstatus' element={<User />}></Route>
+          <Route  path='/update' element={<Update />}></Route>
 
 
         </Routes>

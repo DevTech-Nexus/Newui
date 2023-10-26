@@ -5,6 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Logout from './Logout';
 import { useLocation } from "react-router-dom";
 
 import './Styles.css';
@@ -13,7 +14,7 @@ export default function Navigationbar() {
   const location = useLocation();
 
   // Hide navbar on the login page and Login page
-  if(location.pathname == "/Login" || location.pathname == "/Register") {
+  if(location.pathname == "/login" || location.pathname == "/register") {
     return null;
   }
 
@@ -30,9 +31,9 @@ export default function Navigationbar() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/Home">Home</Nav.Link>
-              <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/Shop">Shop</Nav.Link>
-              <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/About">About</Nav.Link>
+              <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/home">Home</Nav.Link>
+              <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/shop">Shop</Nav.Link>
+              <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/about">About</Nav.Link>
             </Nav>
 
             <Form className="d-flex">
@@ -51,9 +52,9 @@ export default function Navigationbar() {
                 User
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="/Login">Login</Dropdown.Item>
-                <Dropdown.Item href="/Register">Register</Dropdown.Item>
-                <Dropdown.Item href="/Register">Log out</Dropdown.Item>
+                <Dropdown.Item href="/login">Login</Dropdown.Item>
+                <Dropdown.Item href="/register">Register</Dropdown.Item>
+                <Dropdown.Item href="/logout">Log out</Dropdown.Item>
                 <Dropdown.Item href="/Orderstatus">Order Status</Dropdown.Item>
                 <Dropdown.Item href="/Update">Edit Profile</Dropdown.Item>
 
