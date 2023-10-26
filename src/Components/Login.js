@@ -10,19 +10,18 @@ import Button from 'react-bootstrap/Button';
 import './Styles.css';
 
 
-
 export default function Login() {
 
 
 
 
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -40,13 +39,14 @@ export default function Login() {
     // Validate email and password fields
     const validationErrors = {};
 
-    if (!formData.email) {
-      validationErrors.email = 'Email is required';
+    if (!formData.username) {
+      validationErrors.username = 'Username is required';
     }
 
     if (!formData.password) {
       validationErrors.password = 'Password is required';
     }
+
 
     // Set validation errors if any
     setErrors(validationErrors);
@@ -54,11 +54,43 @@ export default function Login() {
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {
       // Add your logic here, e.g., send the form data to a server
-
-
+      alert(formData.username + " " + formData.password)
+      checkdetails(formData.username, formData.password);
     }
   };
 
+  const checkdetails = async (username, password) => {
+    try {
+      const validationErrors = {};
+
+      const response = await fetch("http://localhost:8082/users/login",
+        {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json;"
+          },
+          body: `{
+            "username": "${username}",
+            "password": "${password}"
+          }`
+
+        });
+      const reply = await response.text();
+      if (reply === "success") {
+        localStorage.setItem("user", username);
+        window.location.href = "/home";
+      }
+      else {
+        console.log(reply)
+        validationErrors.username = 'Email or password is incorrect';
+        setErrors(validationErrors);
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
 
 
 
@@ -79,18 +111,21 @@ export default function Login() {
 
 
             <form onSubmit={handleSubmit}>
+              
+            {errors.username && <div className="text-danger">{errors.username}</div>}
               <MDBInput
                 wrapperClass='mb-4'
-                label='Email address'
+                label='Username'
                 id='formControlLg'
-                type='email'
+                type='name'
                 size="lg"
-                name="email"
-                value={formData.email}
+                name="username"
+                required={true}
+                value={formData.username}
                 onChange={handleInputChange}
               />
-              {errors.email && <div className="text-danger">{errors.email}</div>}
-
+              
+              {errors.password && <div className="text-danger">{errors.password}</div>}
               <MDBInput
                 wrapperClass='mb-4'
                 label='Password'
@@ -98,13 +133,13 @@ export default function Login() {
                 type='password'
                 size="lg"
                 name="password"
+                required={true}
                 value={formData.password}
                 onChange={handleInputChange}
               />
-              {errors.password && <div className="text-danger">{errors.password}</div>}
 
 
-              <a href='/User'><Button
+              <Button
                 variant="primary"
                 size="lg"
 
@@ -119,12 +154,12 @@ export default function Login() {
               >
                 Login
               </Button>
-              </a>
 
-                <br></br>
-                <br></br>
-                <br></br>
-                <p>Don't have an account yet?</p>
+
+              <br></br>
+              <br></br>
+              <br></br>
+              <p>Don't have an account yet?</p>
               <a href='/register'><Button
                 variant="primary"
                 size="md"
@@ -135,7 +170,6 @@ export default function Login() {
                 }}
 
                 className="custom-button2"
-              // Add type="submit" to the button
               >
                 Create an account
               </Button></a>
