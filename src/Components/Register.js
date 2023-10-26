@@ -15,6 +15,9 @@ import Button from 'react-bootstrap/Button';
   
    export default function Register() {
   
+    if(location.pathname == "/Register" || location.pathname == "/Login"){
+      return null;
+    }
    
    
   
