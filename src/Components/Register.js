@@ -129,7 +129,7 @@ import Button from 'react-bootstrap/Button';
               
              
               
-              <a href='/Register'><Button
+              <a href='/register'><Button
                 variant="primary"
                 size="lg"
                 type="submit"
@@ -145,14 +145,17 @@ import Button from 'react-bootstrap/Button';
               >
              Register
               </Button></a>
-              <a href='/Login'><Button
+
+              <br/>
+              <br/>
+              <a href='/login'><Button
               variant="primary"
-              size="lg"
+              size="md"
              
               style={{
                
                 background:
-                  'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))',
+                  'linear-gradient(to right, rgba(118, 75, 162, 0.7, rgba(101, 126, 234, 0.7)',
               }}
              
               className="custom-button2"
@@ -170,9 +173,6 @@ import Button from 'react-bootstrap/Button';
             </div> */}
   
             
-            <div className="divider d-flex align-items-center my-4">
-              <p className="text-center fw-bold mx-3 mb-0">OR</p>
-            </div>
   
           </MDBCol>
   

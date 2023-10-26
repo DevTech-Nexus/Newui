@@ -123,9 +123,13 @@ export default function Login() {
               </Button>
               </a>
 
-              <a href='/Register'><Button
+                <br></br>
+                <br></br>
+                <br></br>
+                <p>Don't have an account yet?</p>
+              <a href='/register'><Button
                 variant="primary"
-                size="lg"
+                size="md"
 
                 style={{
                   background:
@@ -135,7 +139,7 @@ export default function Login() {
                 className="custom-button2"
               // Add type="submit" to the button
               >
-                Register
+                Create an account
               </Button></a>
             </form>
 
