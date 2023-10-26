@@ -60,7 +60,7 @@ export default function Register() {
       }
       else {
         console.log(reply)
-        validationErrors.username = 'Email or password is incorrect';
+        validationErrors.user = 'Sorry! user with the same name or email already exists';
         setErrors(validationErrors);
       }
     }
@@ -79,7 +79,7 @@ export default function Register() {
       validationErrors.user = 'username is required';
     }
 
-    if(formData.username < 3) {
+    if (formData.username < 3) {
       validationErrors.user = 'username must be at least 3 characters long'
     }
 
@@ -112,7 +112,7 @@ export default function Register() {
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {
       // Add your logic here, e.g., send the form data to a server
-        push(formData.username, formData.password, formData.email);
+      push(formData.username, formData.password, formData.email);
 
 
 
@@ -139,7 +139,7 @@ export default function Register() {
 
 
             <form onSubmit={handleSubmit}>
-
+              {errors.user && <div className="text-danger">{errors.user}</div>}
               <MDBInput
                 wrapperClass='mb-4'
                 label='username'
@@ -151,7 +151,7 @@ export default function Register() {
                 onChange={handleInputChange}
               />
 
-              {errors.user && <div className="text-danger">{errors.user}</div>}
+              {errors.email && <div className="text-danger">{errors.email}</div>}
               <MDBInput
                 wrapperClass='mb-4'
                 label='Email address'
@@ -162,8 +162,9 @@ export default function Register() {
                 value={formData.email}
                 onChange={handleInputChange}
               />
-              {errors.email && <div className="text-danger">{errors.email}</div>}
 
+
+              {errors.password && <div className="text-danger">{errors.password}</div>}
               <MDBInput
                 wrapperClass='mb-4'
                 label='Password'
@@ -174,7 +175,7 @@ export default function Register() {
                 value={formData.password}
                 onChange={handlePasswordChange}
               />
-              {errors.password && <div className="text-danger">{errors.password}</div>}
+
 
 
 
