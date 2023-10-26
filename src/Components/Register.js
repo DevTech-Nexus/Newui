@@ -6,7 +6,7 @@ import {
 } from 'mdb-react-ui-kit';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-
+import zxcvbn from 'zxcvbn';
 import './Styles.css';
 
 
@@ -28,6 +28,23 @@ export default function Register() {
   });
 
 
+    const handlePasswordChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+
+      const strength = zxcvbn(value);
+      const score = strength.score;
+      if (score >= 3) {
+        // Password is strong enough, no errors
+        setErrors({ ...errors, password: '' });
+      } else {
+        // Password is weak, show error
+        setErrors({
+          ...errors,
+          password: 'Password is too weak. Add mo',
+        });
+      }
+    }
 
 
   const handleInputChange = (e) => {
@@ -92,7 +109,7 @@ export default function Register() {
                 wrapperClass='mb-4'
                 label='username'
                 id='formControlLg'
-                type='email'
+                type='name'
                 size="lg"
                 name="user"
                 value={formData.user}
@@ -120,7 +137,7 @@ export default function Register() {
                 size="lg"
                 name="password"
                 value={formData.password}
-                onChange={handleInputChange}
+                onChange={handlePasswordChange}
               />
               {errors.password && <div className="text-danger">{errors.password}</div>}
 
