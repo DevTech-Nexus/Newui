@@ -9,11 +9,14 @@ import { useLocation } from "react-router-dom";
 
 import './Styles.css';
 
-export default function Navigationbar(){
+export default function Navigationbar() {
   const location = useLocation();
 
   // Hide navbar on the login page and Login page
-  
+  if(location.pathname == "/Login" || location.pathname == "/Register") {
+    return null;
+  }
+
 
   return (
     <div>

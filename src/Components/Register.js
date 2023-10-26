@@ -14,11 +14,7 @@ import Button from 'react-bootstrap/Button';
   
   
    export default function Register() {
-  
-    if(location.pathname == "/Register" || location.pathname == "/Login"){
-      return null;
-    }
-   
+     
    
   
     const [formData, setFormData] = useState({
@@ -66,6 +62,8 @@ import Button from 'react-bootstrap/Button';
       // If no validation errors, you can proceed with form submission logic
       if (Object.keys(validationErrors).length === 0) {
         // Add your logic here, e.g., send the form data to a server
+
+
         
       
       }
