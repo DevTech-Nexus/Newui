@@ -18,33 +18,21 @@ export default function Register() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    user: '',
+    username: '',
   });
 
   const [errors, setErrors] = useState({
     email: '',
     password: '',
-    user: '',
+    username: '',
   });
 
 
-    const handlePasswordChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
-      const strength = zxcvbn(value);
-      const score = strength.score;
-      if (score >= 3) {
-        // Password is strong enough, no errors
-        setErrors({ ...errors, password: '' });
-      } else {
-        // Password is weak, show error
-        setErrors({
-          ...errors,
-          password: 'Password is too weak. Add mo',
-        });
-      }
-    }
+  }
 
 
   const handleInputChange = (e) => {
@@ -52,14 +40,47 @@ export default function Register() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const push = async (username, password, email) => {
+    try {
+      const validationErrors = {};
+
+      const response = await fetch("http://localhost:8082/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: `{
+          "username": "${username}",
+          "email": "${email}",
+          "password": "${password}"
+        }`
+      });
+      const reply = await response.text();
+      if (reply === "success") {
+        localStorage.setItem("user", username);
+        window.location.href = "/home";
+      }
+      else {
+        console.log(reply)
+        validationErrors.username = 'Email or password is incorrect';
+        setErrors(validationErrors);
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validate email and password fields
     const validationErrors = {};
 
-    if (!formData.user) {
+    if (!formData.username) {
       validationErrors.user = 'username is required';
+    }
+
+    if(formData.username < 3) {
+      validationErrors.user = 'username must be at least 3 characters long'
     }
 
 
@@ -71,13 +92,27 @@ export default function Register() {
       validationErrors.password = 'Password is required';
     }
 
+    const strength = zxcvbn(formData.password);
+    const score = strength.score;
+    if (score >= 3) {
+      // Password is strong enough, no errors
+      setErrors({ ...errors, password: '' });
+    } else {
+      // Password is weak, show error
+      setErrors({
+        ...errors,
+        password: 'Password is too weak. Add more flare!',
+      });
+    }
+
+
     // Set validation errors if any
     setErrors(validationErrors);
 
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {
       // Add your logic here, e.g., send the form data to a server
-
+        push(formData.username, formData.password, formData.email);
 
 
 
@@ -111,8 +146,8 @@ export default function Register() {
                 id='formControlLg'
                 type='name'
                 size="lg"
-                name="user"
-                value={formData.user}
+                name="username"
+                value={formData.username}
                 onChange={handleInputChange}
               />
 
@@ -144,7 +179,7 @@ export default function Register() {
 
 
 
-              <a href='/register'><Button
+              <Button
                 variant="primary"
                 size="lg"
                 type="submit"
@@ -159,7 +194,7 @@ export default function Register() {
               // Add type="submit" to the button
               >
                 Register
-              </Button></a>
+              </Button>
 
               <br />
               <br />
