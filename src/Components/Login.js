@@ -83,7 +83,7 @@ export default function Login() {
       }
       else {
         console.log(reply)
-        validationErrors.username = 'Email or password is incorrect';
+        validationErrors.username = 'Username or password is incorrect';
         setErrors(validationErrors);
       }
     }

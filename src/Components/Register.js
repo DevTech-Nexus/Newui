@@ -30,6 +30,19 @@ export default function Register() {
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
+    const strength = zxcvbn(formData.password);
+    const score = strength.score;
+    if (score >= 3) {
+      // Password is strong enough, no errors
+      setErrors({ ...errors, password: '' });
+    } else {
+      // Password is weak, show error
+      setErrors({
+        ...errors,
+        password: 'Password is too weak. Add more flare!',
+      });
+    }
+
     setFormData({ ...formData, [name]: value });
 
   }
@@ -37,6 +50,7 @@ export default function Register() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
     setFormData({ ...formData, [name]: value });
   };
 
@@ -94,15 +108,12 @@ export default function Register() {
 
     const strength = zxcvbn(formData.password);
     const score = strength.score;
-    if (score >= 3) {
-      // Password is strong enough, no errors
-      setErrors({ ...errors, password: '' });
-    } else {
+    if (score < 3) {
       // Password is weak, show error
-      setErrors({
-        ...errors,
-        password: 'Password is too weak. Add more flare!',
-      });
+      validationErrors.password = 'Password is too weak. Add more flare!'; 
+    }
+    else {
+      validationErrors.password = '';
     }
 
 
@@ -212,7 +223,7 @@ export default function Register() {
                 className="custom-button2"
               // Add type="submit" to the button
               >
-                Back to login
+                Login instead
               </Button></a>
             </form>
 
