@@ -80,7 +80,7 @@ export default function Shop() {
                 <Card.Title>{product.productName}</Card.Title>
 
                 <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Add to cart
+                  More Info
                 </Button>{' '}
               </Card.Body>
             </Card>
