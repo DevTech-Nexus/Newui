@@ -43,6 +43,8 @@ function App() {
           <Route  path='/update' element={<Update />}></Route>
           <Route  path='/logout' element={<Logout />}></Route>
           <Route  path='/product/:id' element={<ProductTile />}></Route>
+          <Route  path='/edit/:id' element={<ProductTile />}></Route>
+          <Route  path='/delet/:id' element={<ProductTile />}></Route>
         </Routes>
         <Foot />
 

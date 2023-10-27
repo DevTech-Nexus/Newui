@@ -70,11 +70,6 @@ export default function Navigationbar() {
                       <Dropdown.Item href="/logout" onClick={Logout}>Log out</Dropdown.Item>
 
                     </React.Fragment>)}
-
-                {user == 'admin' && (
-                  <Dropdown.Item href="/Admin">Admin Panel</Dropdown.Item>
-                )
-                }
               </Dropdown.Menu>
             </Dropdown>
 
@@ -95,9 +90,6 @@ export default function Navigationbar() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                   <Dropdown.Item href="/new">Add new device</Dropdown.Item>
-                      <Dropdown.Item href="/edit">Edit device</Dropdown.Item>
-                      <Dropdown.Item href="/delete">Delete device</Dropdown.Item>
-
                   </Dropdown.Menu>
                 </Dropdown>
               )

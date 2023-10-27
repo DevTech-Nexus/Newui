@@ -17,13 +17,13 @@ export default function Shop() {
   var [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    try{
-    const response = await fetch('https://expertmobile-productservice.azurewebsites.net/products/');
-    products = await response.json();
-    console.log(products);
-    setProducts(products);
+    try {
+      const response = await fetch('https://expertmobile-productservice.azurewebsites.net/products/');
+      products = await response.json();
+      console.log(products);
+      setProducts(products);
     }
-    catch(err) {
+    catch (err) {
       console.log(err);
     }
   }
@@ -66,12 +66,12 @@ export default function Shop() {
           </MDBCarouselItem>
         </MDBCarousel></center>
       <center><Image src="https://i.postimg.cc/QNqVvnYW/Screenshot-2023-10-09-102810.png" fluid /></center><br></br>
-      
-      
+
+
       <Container>
-      <h2>Offers</h2><hr/>
-      <center><Row>
-      
+        <h2>Offers</h2><hr />
+        <center><Row>
+
           {products.map(product => (
 
             <Card style={{ width: '15rem', margin: '20px' }}>
@@ -80,12 +80,29 @@ export default function Shop() {
                 <Card.Title>{product.productName}</Card.Title>
                 <Card.Text>
                   USD {product.price}
-                  </Card.Text>
+                </Card.Text>
 
-              <a href={'product/' + product.id}>
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  More Info
-                </Button>{' '}</a>
+                <a href={'product/' + product.id}>
+                  <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
+                    More Info
+                  </Button>{' '}</a>
+
+                {sessionStorage.getItem('user') == 'admin' &&
+                  (
+                    <React.Fragment>
+                      <br/>
+                      <br/>
+                      <a href={'edit/' + product.id}>
+                        <Button variant="secondary" size="sm" >
+                          Edit
+                        </Button>{' '}</a>
+
+                      <a href={'edit/' + product.id}>
+                        <Button variant="secondary" size="sm">
+                          Delete
+                        </Button>{' '}</a>
+                    </React.Fragment>
+                    )}
               </Card.Body>
             </Card>
 
