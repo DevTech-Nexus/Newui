@@ -100,95 +100,21 @@ export default function Home() {
 
 
 
-        <Container><center>
+        <Container>
           <Row>
-            <Col auto={{ order: 'last' }}>
-              <Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/43pb87x4/Screenshot-2023-10-09-111418.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
+            <br></br>
+            <br></br>
+            <center>
+                <a href="/shop"><Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
+                  Head to the shop
                 </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-            <Col auto><Card style={{ width: '15rem', height: '20rem' }}>
-              <Card.Img fluid="top" src="https://i.postimg.cc/3w4zWRRg/ergete5.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
+                </a></center>
+          </Row>
 
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-            <Col auto={{ order: 'first' }}><Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/SsN2WJXv/Screenshot-2023-10-09-111219.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-            <Col auto={{ order: 'first' }}><Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-          </Row><br></br>
-          <Row>
-            <Col auto={{ order: 'last' }}><Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/1tNLxTKh/Screenshot-2023-10-09-111348.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-            <Col auto><Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/vZkhRm2T/Screenshot-2023-10-09-111329.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-            <Col auto><Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-            <Col auto={{ order: 'first' }}><Card style={{ width: '15rem' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-
-                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                  Buy Now
-                </Button>{' '}
-              </Card.Body>
-            </Card></Col>
-          </Row></center>
         </Container>
         <br></br>
-
+        <br></br>
+        <br></br>
       </div>
     </div>
 
