@@ -14,7 +14,7 @@ import './Styles.css';
 export default function Navigationbar() {
   const location = useLocation();
   const name = localStorage.getItem("user");
-  const [user, setName] = useState(name ? name : 'user');
+  const [user, setName] = useState(name ? name : null);
 
 
 
@@ -54,15 +54,22 @@ export default function Navigationbar() {
             {/* Add user dropdown menu with custom CSS */}
             <Dropdown align="end" style={{ marginLeft: '10px' }}>
               <Dropdown.Toggle variant="secondary" id="user-dropdown">
-                {user && <div>{user}</div>}
+                {user == null ? (<div>{'User'}</div>) : (<div>{user}</div>)}
               </Dropdown.Toggle>
               <Dropdown.Menu>
+                {user == null ? (    
+                  <React.Fragment>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
                 <Dropdown.Item href="/register">Register</Dropdown.Item>
-                <Dropdown.Item href="/logout" onClick={Logout}>Log out</Dropdown.Item>
-                <Dropdown.Item href="/Orderstatus">Order Status</Dropdown.Item>
-                <Dropdown.Item href="/Update">Edit Profile</Dropdown.Item>
+                </React.Fragment>            
+                ) :
+                  (
+                    <React.Fragment>
+                      <Dropdown.Item href="/Orderstatus">Check Orders</Dropdown.Item>
+                      <Dropdown.Item href="/Update">Change Password</Dropdown.Item>
+                      <Dropdown.Item href="/logout" onClick={Logout}>Log out</Dropdown.Item>
 
+                    </React.Fragment>)}
               </Dropdown.Menu>
             </Dropdown>
 

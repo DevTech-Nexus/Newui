@@ -1,7 +1,6 @@
 export default function Logout() {
-
+    window.location.href = '/home';
     const logout = async () => {
-        window.location.href = '/home';
         try {
             const response = await fetch("http://localhost:8082/users/logout", 
             {
