@@ -17,12 +17,15 @@ export default function Shop() {
   var [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-
+    try{
     const response = await fetch('http://localhost:8081/products/');
     products = await response.json();
     console.log(products);
     setProducts(products);
-
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
