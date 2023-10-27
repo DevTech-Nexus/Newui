@@ -5,8 +5,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Logout from './Logout';
 import { useLocation } from "react-router-dom";
+import Logout from './Logout';
 
 import './Styles.css';
 
@@ -54,7 +54,7 @@ export default function Navigationbar() {
               <Dropdown.Menu>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
                 <Dropdown.Item href="/register">Register</Dropdown.Item>
-                <Dropdown.Item href="/logout">Log out</Dropdown.Item>
+                <Dropdown.Item href="/login" onClick={ Logout }>Log out</Dropdown.Item>
                 <Dropdown.Item href="/Orderstatus">Order Status</Dropdown.Item>
                 <Dropdown.Item href="/Update">Edit Profile</Dropdown.Item>
 
