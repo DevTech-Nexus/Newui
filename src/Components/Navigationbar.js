@@ -28,7 +28,7 @@ export default function Navigationbar() {
     <div>
       <Navbar expand="lg" bg="dark" data-bs-theme="dark" fixed="top">
         <Container fluid>
-          <Navbar.Brand style={{ color: '#FFFFFF' }} href="#" className='logo'>Expert Mobile</Navbar.Brand>
+          <Navbar.Brand style={{ color: '#FFFFFF' }} href="/home" className='logo'>Expert Mobile</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
