@@ -53,7 +53,6 @@ export default function Login() {
 
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {
-      // Add your logic here, e.g., send the form data to a server
       checkdetails(formData.username, formData.password);
     }
   };
@@ -77,7 +76,7 @@ export default function Login() {
         });
       const reply = await response.text();
       if (reply === "success") {
-        localStorage.setItem("user", username);
+        sessionStorage.setItem("user", username);
         window.location.href = "/home";
       }
       else {

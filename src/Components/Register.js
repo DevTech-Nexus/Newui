@@ -70,7 +70,7 @@ export default function Register() {
       });
       const reply = await response.text();
       if (reply === "success") {
-        localStorage.setItem("user", username);
+        sessionStorage.setItem("user", username);
         window.location.href = "/home";
       }
       else {
