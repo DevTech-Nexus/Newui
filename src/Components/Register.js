@@ -112,10 +112,6 @@ export default function Register() {
       // Password is weak, show error
       validationErrors.password = 'Password is too weak. Add more flare!';
     }
-    else {
-      validationErrors.password = '';
-    }
-
     if(formData.password !== formData.confirmpassword) {
       validationErrors.password = 'Passwords do not match';
     }
@@ -124,6 +120,7 @@ export default function Register() {
 
     // Set validation errors if any
     setErrors(validationErrors);
+    console.log(Object.keys(validationErrors));
 
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {

@@ -54,7 +54,6 @@ export default function Login() {
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {
       // Add your logic here, e.g., send the form data to a server
-      alert(formData.username + " " + formData.password)
       checkdetails(formData.username, formData.password);
     }
   };
@@ -157,9 +156,8 @@ export default function Login() {
 
 
               <br></br>
+              
               <br></br>
-              <br></br>
-              <p>Don't have an account yet?</p>
               <a href='/register'><Button
                 variant="primary"
                 size="md"

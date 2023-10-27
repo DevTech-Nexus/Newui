@@ -17,15 +17,15 @@ export default function Update() {
 
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    user: '',
+    currentpassword: '',
+    newpassword: '',
+    confirmpassword: '',
   });
 
   const [errors, setErrors] = useState({
-    email: '',
-    password: '',
-    user: '',
+    currentpassword: '',
+    newpassword: '',
+    confirmpassword: '',
   });
 
 
@@ -36,26 +36,44 @@ export default function Update() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const push = async (username, password, newPassword) => {
+    try {
+      const validationErrors = {};
+      const response = await fetch("http://localhost:8082/users/update", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: `{
+          "username" : "${username}",
+          "password" : "${password}",
+          "newPassword" : "${newPassword}"
+        }`
+      });
+      const reply = await response.text();
+      if (reply === "success") {
+        localStorage.setItem("user", username);
+        window.location.href = "/home";
+      }
+      else {
+        console.log(reply)
+        validationErrors.password = 'Your current password seems wrong';
+        setErrors(validationErrors);
+      }
+
+    }
+
+
+    catch (err) {
+      console.log(err)
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validate email and password fields
     const validationErrors = {};
 
-    if (!formData.user) {
-      validationErrors.user = 'username is required';
-    }
-
-
-    if (!formData.email) {
-      validationErrors.email = 'Email is required';
-    }
-
-    if (!formData.password) {
-      validationErrors.password = 'Password is required';
-    }
-
-    if(formData.password !== formData.confirmpassword) {
+    if (formData.newpassword !== formData.confirmpassword) {
       validationErrors.password = 'Passwords do not match';
     }
 
@@ -66,7 +84,7 @@ export default function Update() {
     // If no validation errors, you can proceed with form submission logic
     if (Object.keys(validationErrors).length === 0) {
       // Add your logic here, e.g., send the form data to a server
-
+      push(localStorage.getItem("user"), formData.currentpassword, formData.newpassword)
 
     }
   };
@@ -91,19 +109,35 @@ export default function Update() {
 
 
             <form onSubmit={handleSubmit}>
+              <br />
 
-              {errors.password && <div className="text-danger">{errors.password}</div>}
               <MDBInput
                 wrapperClass='mb-4'
-                label='Password'
+                label='Current Password'
                 id='formControlLg'
                 type='password'
                 size="lg"
-                name="password"
-                value={formData.password}
+                name="currentpassword"
+                required={true}
+                value={formData.currentpassword}
                 onChange={handleInputChange}
               />
-              
+
+              <MDBInput
+                wrapperClass='mb-4'
+                label='New Password'
+                id='formControlLg'
+                type='password'
+                size="lg"
+                name="newpassword"
+                required={true}
+                value={formData.newpassword}
+                onChange={handleInputChange}
+              />
+
+
+
+
               <MDBInput
                 wrapperClass='mb-4'
                 label='Repeat Password'
@@ -111,9 +145,12 @@ export default function Update() {
                 type='password'
                 size="lg"
                 name="confirmpassword"
+                required={true}
                 value={formData.confirmpassword}
                 onChange={handleInputChange}
               />
+              {errors.password && <div className="text-danger">{errors.password}</div>}
+
 
 
 
