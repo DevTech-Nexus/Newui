@@ -73,6 +73,7 @@ export default function Navigationbar() {
               </Dropdown.Menu>
             </Dropdown>
 
+            {user && (
             <a href='/Cart'>
               <img
                 className='cart'
@@ -80,6 +81,7 @@ export default function Navigationbar() {
                 alt="Shopping Cart"
               />
             </a>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
