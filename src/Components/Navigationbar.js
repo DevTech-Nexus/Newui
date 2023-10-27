@@ -13,15 +13,13 @@ import './Styles.css';
 
 export default function Navigationbar() {
   const location = useLocation();
+  const name = localStorage.getItem("user");
+  const [user, setName] = useState(name ? name : 'user');
 
-  const [username, setName] = useState(
-    {
-      "username" : ''
-    }
-  );
+
 
   // Hide navbar on the login page and Login page
-  if(location.pathname == "/login" || location.pathname == "/register") {
+  if (location.pathname == "/login" || location.pathname == "/register") {
     return null;
   }
 
@@ -56,12 +54,12 @@ export default function Navigationbar() {
             {/* Add user dropdown menu with custom CSS */}
             <Dropdown align="end" style={{ marginLeft: '10px' }}>
               <Dropdown.Toggle variant="secondary" id="user-dropdown">
-                User
+                {user && <div>{user}</div>}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
                 <Dropdown.Item href="/register">Register</Dropdown.Item>
-                <Dropdown.Item href="/logout" onClick={ Logout }>Log out</Dropdown.Item>
+                <Dropdown.Item href="/logout" onClick={Logout}>Log out</Dropdown.Item>
                 <Dropdown.Item href="/Orderstatus">Order Status</Dropdown.Item>
                 <Dropdown.Item href="/Update">Edit Profile</Dropdown.Item>
 

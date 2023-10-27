@@ -1,6 +1,7 @@
 export default function Logout() {
 
     const logout = async () => {
+        window.location.href = '/home';
         try {
             const response = await fetch("http://localhost:8082/users/logout", 
             {
@@ -12,7 +13,6 @@ export default function Logout() {
             });
             const reply = await response.text();
             localStorage.removeItem('user');
-            window.location.href = '/home';
         }
         catch (err) {
             console.log(err);
