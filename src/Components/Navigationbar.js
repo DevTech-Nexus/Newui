@@ -78,7 +78,7 @@ export default function Navigationbar() {
               </Dropdown.Menu>
             </Dropdown>
 
-            {user != 'admin' ? (
+            {user != 'admin'? (
               <a href='/Cart'>
                 <img
                   className='cart'
@@ -94,9 +94,9 @@ export default function Navigationbar() {
                        Tools
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                  <Dropdown.Item href="/product/new">Add new mobile</Dropdown.Item>
-                      <Dropdown.Item href="/update">Change Password</Dropdown.Item>
-                      <Dropdown.Item href="/logout" onClick={Logout}>Log out</Dropdown.Item>
+                  <Dropdown.Item href="/new">Add new device</Dropdown.Item>
+                      <Dropdown.Item href="/edit">Edit device</Dropdown.Item>
+                      <Dropdown.Item href="/delete">Delete device</Dropdown.Item>
 
                   </Dropdown.Menu>
                 </Dropdown>
