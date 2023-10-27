@@ -41,7 +41,7 @@ function App() {
           <Route  path='/orderstatus' element={<User />}></Route>
           <Route  path='/update' element={<Update />}></Route>
           <Route  path='/logout' element={<Logout />}></Route>
-          <Route  path='/product' element={<ProductTile />}></Route>
+          <Route  path='/product/:id' element={<ProductTile />}></Route>
 
         </Routes>
         <Foot />

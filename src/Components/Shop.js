@@ -75,13 +75,17 @@ export default function Shop() {
           {products.map(product => (
 
             <Card style={{ width: '15rem', margin: '20px' }}>
-              <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
+              <Card.Img variant="top" src={product.imgUrl} height={'320rem'} />
               <Card.Body>
                 <Card.Title>{product.productName}</Card.Title>
+                <Card.Text>
+                  USD {product.price}
+                  </Card.Text>
 
+              <a href={'product/' + product.id}>
                 <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
                   More Info
-                </Button>{' '}
+                </Button>{' '}</a>
               </Card.Body>
             </Card>
 
