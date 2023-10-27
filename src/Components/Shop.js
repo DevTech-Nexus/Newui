@@ -20,22 +20,9 @@ export default function Shop() {
 
     const response = await fetch('http://localhost:8081/products/');
     products = await response.json();
+    console.log(products);
+    setProducts(products);
 
-    products.map((product) => {
-      <Card style={{ width: '15rem' }}>
-      <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
-      <Card.Body>
-        <Card.Title>product.productName</Card.Title>
-
-        <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-          Buy Now
-        </Button>{' '}
-      </Card.Body>
-    </Card>
-
-    });    
-
-    
   }
 
   getProducts();
@@ -82,34 +69,25 @@ export default function Shop() {
 
           </MDBCarouselItem>
         </MDBCarousel></center>
-      <center><Image src="https://i.postimg.cc/QNqVvnYW/Screenshot-2023-10-09-102810.png" fluid />;</center><br></br>
+      <center><Image src="https://i.postimg.cc/QNqVvnYW/Screenshot-2023-10-09-102810.png" fluid /></center><br></br>
       <Container>
-        <Row>
+      <center><Row>
+          {products.map(product => (
 
-          <Card style={{ width: '15rem' }}>
-            <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
+            <Card style={{ width: '15rem', margin: '20px' }}>
+              <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
+              <Card.Body>
+                <Card.Title>{product.productName}</Card.Title>
 
-              <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                Buy Now
-              </Button>{' '}
-            </Card.Body>
-          </Card>
+                <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
+                  Add to cart
+                </Button>{' '}
+              </Card.Body>
+            </Card>
 
-
-          <Card style={{ width: '15rem' }}>
-            <Card.Img variant="top" src="https://i.postimg.cc/Hnr1LnmK/Screenshot-2023-10-09-111158.png" height={'320rem'} />
-            <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-
-              <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                Buy Now
-              </Button>{' '}
-            </Card.Body>
-          </Card>
-
+          ))}
         </Row>
+        </center>
 
 
       </Container>
