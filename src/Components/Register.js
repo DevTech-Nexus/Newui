@@ -58,13 +58,14 @@ export default function Register() {
     try {
       const validationErrors = {};
 
-      const response = await fetch("http://localhost:8082/users/register", {
+      const response = await fetch("https://expertmobile-userservice.azurewebsites.net/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: `{
           "username": "${username}",
           "email": "${email}",
-          "password": "${password}"
+          "password": "${password}",
+          "role" : "USER"
         }`
       });
       const reply = await response.text();

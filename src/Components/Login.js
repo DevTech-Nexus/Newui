@@ -62,7 +62,7 @@ export default function Login() {
     try {
       const validationErrors = {};
 
-      const response = await fetch("http://localhost:8082/users/login",
+      const response = await fetch("https://expertmobile-userservice.azurewebsites.net/users/login",
         {
           method: "POST",
           headers: {

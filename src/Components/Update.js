@@ -39,7 +39,7 @@ export default function Update() {
   const push = async (username, password, newPassword) => {
     try {
       const validationErrors = {};
-      const response = await fetch("http://localhost:8082/users/update", {
+      const response = await fetch("https://expertmobile-userservice.azurewebsites.net/users/update", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: `{

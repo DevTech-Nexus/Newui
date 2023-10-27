@@ -14,6 +14,7 @@ import Shop from './Components/Shop';
 import './Components/Styles.css';
 import Update from './Components/Update';
 import Logout from './Components/Logout';
+import ProductTile from './Components/ProductTile';
 function App() {
 
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route  path='/orderstatus' element={<User />}></Route>
           <Route  path='/update' element={<Update />}></Route>
           <Route  path='/logout' element={<Logout />}></Route>
+          <Route  path='/product' element={<ProductTile />}></Route>
 
         </Routes>
         <Foot />

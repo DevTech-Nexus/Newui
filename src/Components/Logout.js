@@ -1,8 +1,9 @@
 export default function Logout() {
     window.location.href = '/home';
+    localStorage.removeItem('user');
     const logout = async () => {
         try {
-            const response = await fetch("http://localhost:8082/users/logout", 
+            const response = await fetch("https://expertmobile-userservice.azurewebsites.net/users/logout", 
             {
                 method: "POST",
                 headers: {
@@ -11,7 +12,7 @@ export default function Logout() {
                   }
             });
             const reply = await response.text();
-            localStorage.removeItem('user');
+            
         }
         catch (err) {
             console.log(err);
