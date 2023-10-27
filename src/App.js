@@ -13,6 +13,7 @@ import Register from './Components/Register';
 import Shop from './Components/Shop';
 import './Components/Styles.css';
 import Update from './Components/Update';
+import Logout from './Components/Logout';
 function App() {
 
   return (
@@ -38,7 +39,7 @@ function App() {
           <Route  path='/login' element={<Login />}></Route>
           <Route  path='/orderstatus' element={<User />}></Route>
           <Route  path='/update' element={<Update />}></Route>
-
+          <Route  path='/logout' element={<Logout />}></Route>
 
         </Routes>
         <Foot />

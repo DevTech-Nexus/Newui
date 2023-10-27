@@ -11,14 +11,12 @@ export default function Logout() {
                   }
             });
             const reply = await response.text();
-            console.log(reply);
             localStorage.removeItem('user');
-            window.location.href = '/login';
+            window.location.href = '/home';
         }
         catch (err) {
             console.log(err);
         }
     }
-
-    return logout;
+    logout();
 }
