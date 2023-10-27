@@ -18,7 +18,7 @@ export default function Shop() {
 
   const getProducts = async () => {
     try{
-    const response = await fetch('http://localhost:8081/products/');
+    const response = await fetch('https://expertmobile-productservice.azurewebsites.net/products/');
     products = await response.json();
     console.log(products);
     setProducts(products);

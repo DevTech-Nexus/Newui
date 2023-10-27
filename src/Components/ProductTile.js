@@ -18,7 +18,7 @@ function ProductTile() {
 
   const getInfo = async () => {
     try {
-      const response = await fetch(`http://localhost:8081/products/${id}`);
+      const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`);
       const data = await response.json();
       setProduct(data);
     } catch (err) {
@@ -83,7 +83,7 @@ function ProductTile() {
 
           </div>
           <br />
-          <h5> Stock Levels: {product.stock_Quantity}</h5>
+          <h5> Stock: {product.stock_Quantity}</h5>
 
           <br />
           <div className="d-flex flex-column mt-4">
