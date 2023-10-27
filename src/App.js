@@ -15,6 +15,7 @@ import './Components/Styles.css';
 import Update from './Components/Update';
 import Logout from './Components/Logout';
 import ProductTile from './Components/ProductTile';
+import ProductAddPage from './Components/AddProduct';
 function App() {
 
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route  path='/update' element={<Update />}></Route>
           <Route  path='/logout' element={<Logout />}></Route>
           <Route  path='/product/:id' element={<ProductTile />}></Route>
-
+          <Route path='/product/new' element={<ProductAddPage />}></Route>
         </Routes>
         <Foot />
 

@@ -1,6 +1,6 @@
 export default function Logout() {
     window.location.href = '/home';
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     const logout = async () => {
         try {
             const response = await fetch("https://expertmobile-userservice.azurewebsites.net/users/logout", 
