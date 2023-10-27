@@ -50,7 +50,7 @@ export default function Register() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -110,11 +110,16 @@ export default function Register() {
     const score = strength.score;
     if (score < 3) {
       // Password is weak, show error
-      validationErrors.password = 'Password is too weak. Add more flare!'; 
+      validationErrors.password = 'Password is too weak. Add more flare!';
     }
     else {
       validationErrors.password = '';
     }
+
+    if(formData.password !== formData.confirmpassword) {
+      validationErrors.password = 'Passwords do not match';
+    }
+
 
 
     // Set validation errors if any
@@ -185,6 +190,16 @@ export default function Register() {
                 name="password"
                 value={formData.password}
                 onChange={handlePasswordChange}
+              />
+              <MDBInput
+                wrapperClass='mb-4'
+                label='Repeat Password'
+                id='formControlLg'
+                type='password'
+                size="lg"
+                name="confirmpassword"
+                value={formData.confirmpassword}
+                onChange={handleInputChange}
               />
 
 
