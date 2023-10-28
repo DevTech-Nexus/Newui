@@ -25,7 +25,11 @@ export default function CartCheckout() {
     city: ''
   });
 
-  const [address, setAddress] = useState('');
+  const [prices, setPrices] = useState({
+    deliveryFee: 0,
+    grandTotal: 0
+  });
+
 
   const cart = JSON.parse(sessionStorage.getItem("cart"));
   console.log(cart);
@@ -40,7 +44,7 @@ export default function CartCheckout() {
   }
 
   useEffect(() => {
-  setTotal(totalPrice.toFixed(2));
+    setTotal(totalPrice.toFixed(2));
   }, []);
 
   var extractedProducts = [];
@@ -69,28 +73,52 @@ export default function CartCheckout() {
     setProducts(newCart);
 
     window.location.reload();
-    
+
   }
 
+
   const getDeliveryFee = async () => {
-      //talk to delivery and get distance to location
-      const response = await fetch("http://localhost:8083/deliveries/route?" + {address})
+    //talk to delivery and get distance to location
+
+    if (formData.address.length > 10) {
+      const response = await fetch("http://localhost:8083/deliveries/route?destination=" + formData.address)
+
+      const reply = await response.text();
+      console.log(reply);
+
+      //calculate delivery fee
+      //1USD for 1km
+      if (reply > 0) {
+        var fee = reply;
+        let gtotal = parseFloat(total) + parseFloat(fee);
+        setPrices({ deliveryFee: fee, grandTotal: gtotal });
+      }
+    }
+
+
   }
 
   const checkout = async () => {
-      //only allow  if logged in
-      if(sessionStorage.getItem("user") != null) {
-        
-      }
-      else {
-        window.location.href = '/login';
+    //only allow  if logged in
+    if (sessionStorage.getItem("user") != null) {
 
-      }
+    }
+    else {
+      window.location.href = '/login';
+
+    }
   }
 
-  const handleInputChange = () => {
-    
-  }
+  const [formData, setFormData] = useState({
+    address: '',
+
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    getDeliveryFee();
+  };
 
   useEffect(() => {
     setProducts(extractedProducts);
@@ -162,29 +190,40 @@ export default function CartCheckout() {
                     <center>
 
                       <form>
-                      <MDBTypography
-                      tag="h5"
-                      className="mb-5 pt-2 text-center"
-                    >
-                      Delivery information
-                    </MDBTypography>
+                        <MDBTypography
+                          tag="h5"
+                          className="mb-5 pt-2 text-center"
+                        >
+                          Delivery information
+                        </MDBTypography>
 
                         <MDBInput
                           label="Address"
                           id="address"
                           type="text"
                           className="form-control"
-                          value={address}
+                          value={formData.address}
                           onChange={handleInputChange}
+                          name="address"
                           required
                         />
                       </form>
 
                       <br />
                       <MDBTypography tag="h5" className="fw-bold mb-0">
-                        Total: USD {total} with delivery
+                        Total: USD {total}
                       </MDBTypography>
-                      <br/>
+                      <br />
+                      <MDBTypography tag="h6">
+                        Delivery: USD {prices.deliveryFee}
+                      </MDBTypography>
+
+                      <MDBTypography tag="h5" className="fw-bold mb-0">
+                        Grand Total: USD {prices.grandTotal.toFixed(2)}
+                      </MDBTypography>
+                      <br />
+
+
 
                       <MDBTypography tag="h6" className="fw-muted mb-0">
                         Deliveries take 3 - 5 business days
@@ -192,15 +231,17 @@ export default function CartCheckout() {
                       <br />
 
 
-                      <Button variant="primary" size="lg" 
-                      style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} 
-                      className="custom-button">
-                        Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
-                      </Button>{' '}<br></br><br></br>
+                      {
+                        <Button variant="primary" size="lg"
+                          style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }}
+                          className="custom-button">
+                          Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
+                        </Button>{' '}<br></br><br></br>
                       <a href="/shop">
-                      <Button variant="secondary" size="lg">
-                        Keep shopping
-                      </Button>{' '}</a>
+                        }
+                        <Button variant="secondary" size="lg">
+                          Keep shopping
+                        </Button>{' '}</a>
                     </center>
 
                   </MDBCol>
@@ -212,5 +253,4 @@ export default function CartCheckout() {
       </MDBContainer>
     </section>
   );
-                    }
-                    
+}
