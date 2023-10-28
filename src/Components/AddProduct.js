@@ -49,10 +49,10 @@ const ProductAddPage = () => {
                     noValidate
                     autoComplete="off"
                 >
-                    <TextField id="outlined-basic" label="productName" variant="outlined" />
-                    <TextField id="outlined-basic" label="stock_Quantity" variant="outlined" />
+                    <TextField id="outlined-basic" label="Product Name" variant="outlined" name='productName'/>
+                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stockQuantity'/>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">categorey</InputLabel>
+                        <InputLabel id="demo-simple-select-label" name="Category">category</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -60,41 +60,29 @@ const ProductAddPage = () => {
                             label="category"
                             onChange={handleChange}
                         >
-                            <MenuItem value={10}>phone</MenuItem>
-                            <MenuItem value={20}>Tab</MenuItem>
-                            <MenuItem value={30}>Pc</MenuItem>
+                            <MenuItem value={'high'}>high-end</MenuItem>
+                            <MenuItem value={'medium'}>medium</MenuItem>
+                            <MenuItem value={'low'}>low budget</MenuItem>
                         </Select>
                     </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Brand</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={Brand}
-                            label="brand"
-                            onChange={handleChanges}
-                        >
-                            <MenuItem value={10}>phone</MenuItem>
-                            <MenuItem value={20}>Tab</MenuItem>
-                            <MenuItem value={30}>Pc</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <TextField id="outlined-basic" label="price" variant="outlined" />
-                    <TextField id="outlined-basic" label="weight" variant="outlined" />
-                    <TextField id="outlined-basic" label="imgUrl" variant="outlined" />
+                        <TextField id="outlined-basic" label="Brand" variant="outlined" name='brand'/>
 
-                    <TextField id="outlined-basic" label="dimensions" variant="outlined" />
+                    
+                    <TextField id="outlined-basic" label="price" variant="outlined" name='price' type='number'/>
+                    <TextField id="outlined-basic" label="weight" variant="outlined" name='weight' type='number'/>
+                    <TextField id="outlined-basic" label="image URL" variant="outlined" name='imgUrl' />
+
+                    <TextField id="outlined-basic" label="dimensions" variant="outlined" name="dimensions"/>
                     <TextField
                         id="outlined-multiline-static"
                         label="Description"
                         multiline
                         rows={4}
-                        defaultValue=""
                     />
 
                 </Box><br></br>
 
-                <Button variant='primary' type="submit" className='custom-button8' >Add Record</Button>
+                <Button variant='primary' type="submit" className='custom-button8' >Add Phone</Button>
             </form></center><br></br>
         </div>
     );
