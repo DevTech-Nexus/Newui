@@ -31,32 +31,47 @@ export default function CartCheckout() {
   //calculate total price
   var totalPrice = 0;
 
-  for (let i = 0; i < cart.length; i++) {
-    totalPrice += cart[i].price;
+  if (cart !== null) {
+    for (let i = 0; i < cart.length; i++) {
+      totalPrice += cart[i].price;
+    }
   }
 
-  //separate each item into an array
-  const extractedProducts = cart.map(product => {
-    return JSON.stringify({
-      productName: product.productName,
-      stockQuantity: product.stock_Quantity,
-      imgUrl: product.imgUrl,
-      price: product.price
+  var extractedProducts = [];
+  if (cart != null) {
+    //separate each item into an array
+    extractedProducts = cart.map(product => {
+      return ({
+        number: product.id,
+        productName: product.productName,
+        stockQuantity: product.stock_Quantity,
+        imgUrl: product.imgUrl,
+        price: product.price
+      });
     });
-  });
+  }
+
+  const removeFromCart = (id) => {
+    //find item and then remove it
+    console.log("id:" + id)
+    console.log("hit");
+    const newCart = cart.filter(product => product.id !== id);
+    sessionStorage.setItem("cart", JSON.stringify(newCart));
+    console.log(newCart);
+  }
 
   const getDeliveryFee = async () => {
 
   }
 
   useEffect(() => {
-  setProducts(extractedProducts);
-  setTotal(totalPrice);
-  console.log("products" + products);
-  console.log("total:" + totalPrice);
+    setProducts(extractedProducts);
+    setTotal(totalPrice);
+    console.log("products" + products);
+    console.log("total:" + totalPrice);
 
   }, []);
-  
+
 
   return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
@@ -74,41 +89,37 @@ export default function CartCheckout() {
                       Your Items
                     </MDBTypography>
 
-                    <div className="d-flex align-items-center mb-5">
-                      <div className="flex-shrink-0">
-                        <MDBCardImage
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
-                          fluid
-                          style={{ width: "150px" }}
-                          alt="Generic placeholder image"
-                        />
-                      </div>
 
-                      <div className="flex-grow-1 ms-3">
-                        <MDBTypography tag="h5" className="text-primary">
-                          Samsung Galaxy M11 64GB
-                        </MDBTypography>
-                        <MDBTypography tag="h6" style={{ color: "#9e9e9e" }}>
-                          Color: white
-                        </MDBTypography>
+                    {extractedProducts && extractedProducts.map(product => (
+                      <div className="d-flex align-items-center mb-5">
+                        <div className="flex-shrink-0">
+                          <MDBCardImage
+                            src={product.imgUrl}
+                            fluid
+                            style={{ width: "150px" }}
+                            alt="Generic placeholder image"
+                          />
+                        </div>
 
-                        <div className="d-flex align-items-center">
-                          <p className="fw-bold mb-0 me-5 pe-3">799$</p>
 
-                          <div className="def-number-input number-input safari_only">
-                            <button className="minus"></button>
-                            <input
-                              className="quantity fw-bold text-black"
-                              min={0}
-                              defaultValue={1}
-                              type="number"
-                            />
-                            <button className="plus"></button>
+                        <div className="flex-grow-1 ms-3">
+
+                          <MDBTypography tag="h5" className="text-primary">
+                            {product.productName}
+                          </MDBTypography>
+                          <MDBTypography tag="h6" style={{ color: "#9e9e9e" }}>
+                            {product.brand}
+                          </MDBTypography>
+
+                          <div className="d-flex align-items-center">
+                            <p className="fw-bold mb-0 me-5 pe-3">{product.price}</p>
                           </div>
+
+                          <Button variant="tertiary" onClick={() => removeFromCart(product.number)}> {product.number} remove </Button>
+
                         </div>
                       </div>
-                    </div>
-
+                    ))}
 
                   </MDBCol>
                   <MDBCol lg="5" className="px-5 py-4">
