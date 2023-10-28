@@ -91,7 +91,7 @@ export default function CartCheckout() {
       if (reply > 0) {
         var fee = reply;
         let gtotal = parseFloat(total) + parseFloat(fee);
-        setPrices({ deliveryFee: fee, grandTotal: gtotal });
+        setPrices({ deliveryFee: parseFloat(fee).toFixed(2), grandTotal: gtotal });
       }
     }
 
@@ -168,7 +168,7 @@ export default function CartCheckout() {
                           </MDBTypography>
 
                           <div className="d-flex align-items-center">
-                            <p className="fw-bold mb-0 me-5 pe-3">{product.price}</p>
+                            <p className="fw-bold mb-0 me-5 pe-3">USD {product.price}</p>
                           </div>
 
                           <Button variant="tertiary" onClick={() => removeFromCart(product.uniqId)}> remove </Button>
@@ -209,6 +209,8 @@ export default function CartCheckout() {
                         />
                       </form>
 
+                      
+
                       <br />
                       <MDBTypography tag="h5" className="fw-bold mb-0">
                         Total: USD {total}
@@ -217,7 +219,12 @@ export default function CartCheckout() {
                       <MDBTypography tag="h6">
                         Delivery: USD {prices.deliveryFee}
                       </MDBTypography>
+                      <MDBTypography tag="h6" className="fw-muted mb-0">
+                        Deliveries take 3 - 5 business days
+                      </MDBTypography>
+                      <br />
 
+                      <hr></hr>
                       <MDBTypography tag="h5" className="fw-bold mb-0">
                         Grand Total: USD {prices.grandTotal.toFixed(2)}
                       </MDBTypography>
@@ -225,20 +232,14 @@ export default function CartCheckout() {
 
 
 
-                      <MDBTypography tag="h6" className="fw-muted mb-0">
-                        Deliveries take 3 - 5 business days
-                      </MDBTypography>
-                      <br />
+                      <Button variant="primary" size="lg"
+                        style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }}
+                        className="custom-button">
+                        Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
+                      </Button>{' '}<br></br><br></br>
 
-
-                      {
-                        <Button variant="primary" size="lg"
-                          style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }}
-                          className="custom-button">
-                          Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
-                        </Button>{' '}<br></br><br></br>
                       <a href="/shop">
-                        }
+
                         <Button variant="secondary" size="lg">
                           Keep shopping
                         </Button>{' '}</a>
