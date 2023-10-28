@@ -5,15 +5,15 @@ import React, { useEffect, useState } from 'react';
 
 export default function User() {
 
-  const[deliveries, setDeliveries] = useState([]);
-  
+  const [deliveries, setDeliveries] = useState([]);
+
 
 
   const getDeliveries = async () => {
     const response = await fetch('http://localhost:8083/deliveries/' + (sessionStorage.getItem("user") ? sessionStorage.getItem("user") : null))
 
     const reply = await response.json();
-    deliveries = reply;
+    setDeliveries(reply);
     console.log(deliveries);
   }
 
@@ -36,20 +36,24 @@ export default function User() {
                 <div class="card-header px-4 py-5">
                   <h5 class="text-muted mb-0">Thanks for your Order, <span style={{ color: '#a8729a', }}>{sessionStorage.getItem("user")}</span>!</h5>
                 </div>
-                {deliveries.map(delivery => (  
+                {deliveries.map(delivery => (
                   <div class="card-body p-4">
 
                     <div class="card shadow-0 border mb-4">
                       <div class="card-body">
                         <div class="row">
-                          <div class="col-md-2">                        </div>
+                          <div class="col-md-2">
+                            ID: {delivery.id}
+                          </div>
                         </div>
                         <div class="row d-flex align-items-center">
                           <div class="col-md-2">
                             
                           </div>
                           <div class="col-md-10">
+                          
                             <div class="d-flex justify-content-around mb-1">
+                            status: {delivery.status}
                               <p class="text-muted mt-1 mb-0 small ms-xl-5">{delivery.address}</p>
                             </div>
                           </div>
@@ -58,7 +62,7 @@ export default function User() {
                     </div>
 
                   </div>
-                  ))}
+                ))}
 
               </div>
             </div>
