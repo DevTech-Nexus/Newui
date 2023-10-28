@@ -33,7 +33,6 @@ export default function Shop() {
     //get confirmation
     var result = window.confirm("Are you sure you want to delete this product?");
     if (result) {
-
       try {
         const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`, {
           method: 'DELETE'
@@ -45,7 +44,10 @@ export default function Shop() {
       catch (err) {
         console.log(err);
       }
+      window.location.reload();
     }
+
+    
     
   }
 
@@ -118,7 +120,7 @@ export default function Shop() {
                           Edit
                         </Button>{' '}</a> */}
 
-                      <Button variant="secondary" size="sm" onClick={handleDelete}>
+                      <Button variant="secondary" size="sm" onClick={() => handleDelete(product.id)}>
                         Delete
                       </Button>
                     </React.Fragment>
