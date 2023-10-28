@@ -44,6 +44,7 @@ function ProductTile() {
     }
     cart.push(item);
     sessionStorage.setItem("cart", JSON.stringify(cart));
+    setInfo({success: 'Added to cart'});
   }
 
 

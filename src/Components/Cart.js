@@ -16,21 +16,14 @@ import './Styles.css';
 
 export default function CartCheckout() {
 
-  const [items, setItems] = useState([]);
+  const [cart, setCart] = useState(sessionStorage.getItem("cart") );
 
   const [errors, setErrors] = useState({
     address: '',
     city: ''
   });
-  const getItems = () => {
-    if (sessionStorage.getItem("cart") == null) {
-      sessionStorage.setItem("cart", JSON.stringify([]));
-    }
 
-    const cart = JSON.parse(sessionStorage.getItem("cart"));
-    setItems(cart);
-  }
-
+  console.log(cart);
 
   const getDeliveryFee = async () => {
 
@@ -94,7 +87,7 @@ export default function CartCheckout() {
                       tag="h3"
                       className="mb-5 pt-2 text-center fw-bold text-uppercase"
                     >
-                      
+
                     </MDBTypography>
 
 
@@ -119,7 +112,7 @@ export default function CartCheckout() {
 
                       </form>
 
-                      <br/>
+                      <br />
                       <MDBTypography tag="h5" className="fw-bold mb-0">
                         Total: 2261$
                       </MDBTypography>
@@ -127,7 +120,7 @@ export default function CartCheckout() {
                       <br />
 
                       <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                        Checkout With PayPal <img src="./paypal-icon.svg" style={{width: '20px'}}/>
+                        Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
                       </Button>{' '}<br></br><br></br>
                       <Button variant="secondary" size="lg">
                         Keep shopping
