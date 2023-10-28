@@ -37,12 +37,31 @@ function ProductTile() {
 
   const addToCart = () => {
     let cart = sessionStorage.getItem("cart");
+    let uniqId = sessionStorage.getItem("uniqId");
+    if (uniqId === null) {
+      uniqId = 0;
+      sessionStorage.setItem("uniqId", uniqId);
+    }
     if (cart === null) {
       cart = [];
     } else {
       cart = JSON.parse(cart);
     }
-    cart.push(product);
+    cart.push({
+      uniqId: uniqId,
+      id: product.id,
+      productName: product.productName,
+      brand: product.brand,
+      weight: product.weight,
+      dimensions: product.dimensions,
+      description: product.description,
+      imgUrl: product.imgUrl,
+      price: product.price,
+      stock_Quantity: product.stock_Quantity
+      
+    });
+    uniqId++;
+    sessionStorage.setItem("uniqId", uniqId);
     sessionStorage.setItem("cart", JSON.stringify(cart));
     setInfo({ success: 'Added to cart' });
     console.log(cart);

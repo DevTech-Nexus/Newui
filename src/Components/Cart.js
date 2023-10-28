@@ -43,6 +43,7 @@ export default function CartCheckout() {
     //separate each item into an array
     extractedProducts = cart.map(product => {
       return ({
+        uniqId: product.uniqId,
         number: product.id,
         productName: product.productName,
         stockQuantity: product.stock_Quantity,
@@ -56,9 +57,11 @@ export default function CartCheckout() {
     //find item and then remove it
     console.log("id:" + id)
     console.log("hit");
-    const newCart = cart.filter(product => product.id !== id);
+    let newCart = cart.filter(product => product.uniqId !== id);
     sessionStorage.setItem("cart", JSON.stringify(newCart));
     console.log(newCart);
+
+    setProducts(newCart);
   }
 
   const getDeliveryFee = async () => {
@@ -116,7 +119,7 @@ export default function CartCheckout() {
                             <p className="fw-bold mb-0 me-5 pe-3">{product.price}</p>
                           </div>
 
-                          <Button variant="tertiary" onClick={() => removeFromCart(product.number)}> {product.number} remove </Button>
+                          <Button variant="tertiary" onClick={() => removeFromCart(product.uniqId)}> remove </Button>
 
                         </div>
                       </div>
