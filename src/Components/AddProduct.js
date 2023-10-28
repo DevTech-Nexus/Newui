@@ -18,9 +18,23 @@ import './Styles.css';
 import { Button } from 'react-bootstrap';
 
 const ProductAddPage = () => {
-    const [categorey, setcategorey] = React.useState('');
-    const [Brand, setbrand] = React.useState('');
 
+    const [formData, setFormData] = React.useState({
+        productName: '',
+        stockQuantity: '',
+        category: '',
+        brand: '',
+        price: '',
+        weight: '',
+        imgUrl: '',
+        dimensions: '',
+        description: '',
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+      };
 
     const [errors, setErrors] = React.useState({
         productName: '',
@@ -34,62 +48,30 @@ const ProductAddPage = () => {
         description: '',
     });
 
-
-
-    const handleChange = (event) => {
-        setcategorey(event.target.value)
-
-    }
     const handleSubmit = (event) => {
-        const data = new FormData(event.currentTarget);
-        //check for nulls 
-        if (!data.get('productName')) {
-            setErrors({ ...errors, productName: 'Product Name is required' })
+        event.preventDefault();
+        console.log(
+            formData.productName,
+            formData.stockQuantity,
+            formData.category,
+            formData.brand,
+            formData.price,
+            formData.weight,
+            formData.imgUrl,
+            formData.dimensions,
+            formData.description
+        )
 
+        //check for nulls
+        if(formData.productName !== null && formData.stockQuantity !== null && formData.category !== null && formData.brand !== null && formData.price !== null && formData.weight !== null && formData.imgUrl !== null && formData.dimensions !== null && formData.description !== null){
+            sendData();
         }
-        if (!data.get('stockQuantity')) {
-            setErrors({ ...errors, stockQuantity: 'Stock Quantity is required' })
+        else{
+            alert('Please fill in all fields');
         }
-        if (!data.get('category')) {
-            setErrors({ ...errors, category: 'Category is required' })
-        }
-        if (!data.get('brand')) {
-            setErrors({ ...errors, brand: 'Brand is required' })
-        }
-        if (!data.get('price')) {
-            setErrors({ ...errors, price: 'Price is required' })
-        }
-        if (!data.get('weight')) {
-            setErrors({ ...errors, weight: 'Weight is required' })
-        }
-        if (!data.get('imgUrl')) {
-            setErrors({ ...errors, imgUrl: 'Image URL is required' })
-        }
-        if (!data.get('dimensions')) {
-            setErrors({ ...errors, dimensions: 'Dimensions is required' })
-        }
-        if (!data.get('description')) {
-            setErrors({ ...errors, description: 'Description is required' })
-        }
-        else {
-
-            console.log({
-                productName: data.get('productName'),
-                stockQuantity: data.get('stockQuantity'),
-                category: data.get('category'),
-                brand: data.get('brand'),
-                price: data.get('price'),
-                weight: data.get('weight'),
-                imgUrl: data.get('imgUrl'),
-                dimensions: data.get('dimensions'),
-                description: data.get('description'),
-            });
-            sendData(data);
-        }
-        alert("Some fields are still empty!");
     }
 
-    const sendData = async (data) => {
+    const sendData = async () => {
         const response = await fetch("https://expertmobile-productservice.azurewebsites.net/products/",
             {
                 method: "POST",
@@ -98,21 +80,21 @@ const ProductAddPage = () => {
                     "Content-Type": "application/json;"
                 },
                 body: `{
-                    "productName": "${data.get('productName')}",
-                    "description": "${data.get('description')}",
-                    "category": "${data.get('category')}",
-                    "brand": "${data.get('brand')}",
-                    "price": ${data.get('price')},
-                    "currency" : "USD",
-                    "weight": ${data.get('weight')},
-                    "dimensions": "${data.get('dimensions')}",
-                    "stockQuantity": ${data.get('stockQuantity')},
-                    "imgUrl": "${data.get('imgUrl')}",
+                    "productName": "${formData.productName}",
+                    "stock_Quantity": ${formData.stockQuantity},
+                    "category": "${formData.category}",
+                    "brand": "${formData.brand}",
+                    "price": ${formData.price},
+                    "weight": ${formData.weight},
+                    "imgUrl": "${formData.imgUrl}",
+                    "dimensions": "${formData.dimensions}",
+                    "description": "${formData.description}",
+                    "currency" : "USD"
                     
                 }`
 
             });
-        const reply = await response.text();
+        const reply = await response.json();
         console.log(reply);
     }
 
@@ -135,36 +117,39 @@ const ProductAddPage = () => {
                     noValidate
                     autoComplete="off"
                 >
-                    <TextField id="outlined-basic" label="Product Name" variant="outlined" name='productName' required={true} />
-                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stockQuantity' required={true} />
+                    <TextField id="outlined-basic" label="Product Name" variant="outlined" name='productName' required={true}  value={formData.productName} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stockQuantity' required={true} value={formData.stockQuantity} onChange={handleInputChange}/>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label" name="Category" required={true}>category</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={categorey}
+                            value={formData.category}
                             label="category"
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                         >
                             <MenuItem value={'high'}>high-end</MenuItem>
                             <MenuItem value={'medium'}>medium</MenuItem>
                             <MenuItem value={'low'}>low budget</MenuItem>
                         </Select>
                     </FormControl>
-                    <TextField id="outlined-basic" label="Brand" variant="outlined" name='brand' required={true} />
+                    <TextField id="outlined-basic" label="Brand" variant="outlined" name='brand' required={true} value={formData.brand} onChange={handleInputChange}/>
 
 
-                    <TextField id="outlined-basic" label="price" variant="outlined" name='price' type='number' required={true} />
-                    <TextField id="outlined-basic" label="weight" variant="outlined" name='weight' type='number' required={true} />
-                    <TextField id="outlined-basic" label="image URL" variant="outlined" name='imgUrl' required={true} />
+                    <TextField id="outlined-basic" label="price" variant="outlined" name='price' type='number' required={true} value={formData.price} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="weight" variant="outlined" name='weight' type='number' required={true} value={formData.weight} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="image URL" variant="outlined" name='imgUrl' required={true} value={formData.imgUrl} onChange={handleInputChange}/>
 
-                    <TextField id="outlined-basic" label="dimensions" variant="outlined" name="dimensions" required={true} />
+                    <TextField id="outlined-basic" label="dimensions" variant="outlined" name="dimensions" required={true} value={formData.dimensions} onChange={handleInputChange}/>
                     <TextField
                         id="outlined-multiline-static"
                         label="Description"
                         multiline
                         rows={4}
                         required={true}
+                        name="description"
+                        value={formData.description}
+                        onChange={handleInputChange}
                     />
 
                 </Box><br></br>

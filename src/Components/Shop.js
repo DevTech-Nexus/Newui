@@ -28,6 +28,27 @@ export default function Shop() {
     }
   }
 
+  const handleDelete = async (id) => {
+
+    //get confirmation
+    var result = window.confirm("Are you sure you want to delete this product?");
+    if (result) {
+
+      try {
+        const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`, {
+          method: 'DELETE'
+        });
+        products = await response.json();
+        console.log(products);
+        setProducts(products);
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+    
+  }
+
   useEffect(() => {
     getProducts(); // Call the function inside useEffect
   }, []);
@@ -90,19 +111,18 @@ export default function Shop() {
                 {sessionStorage.getItem('user') == 'admin' &&
                   (
                     <React.Fragment>
-                      <br/>
-                      <br/>
-                      <a href={'edit/' + product.id}>
+                      <br />
+                      <br />
+                      {/* <a href={'edit/' + product.id}>
                         <Button variant="secondary" size="sm" >
                           Edit
-                        </Button>{' '}</a>
+                        </Button>{' '}</a> */}
 
-                      <a href={'edit/' + product.id}>
-                        <Button variant="secondary" size="sm">
-                          Delete
-                        </Button>{' '}</a>
+                      <Button variant="secondary" size="sm" onClick={handleDelete}>
+                        Delete
+                      </Button>
                     </React.Fragment>
-                    )}
+                  )}
               </Card.Body>
             </Card>
 
