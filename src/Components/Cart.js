@@ -36,6 +36,7 @@ export default function CartCheckout() {
       totalPrice += cart[i].price;
     }
   }
+  
 
   var extractedProducts = [];
   if (cart != null) {
