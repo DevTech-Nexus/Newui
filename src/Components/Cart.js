@@ -100,12 +100,24 @@ export default function CartCheckout() {
 
   const checkout = async () => {
     //only allow  if logged in
-    if (sessionStorage.getItem("user") != null) {
-
-    }
-    else {
+    if (sessionStorage.getItem("user") == null) {
       window.location.href = '/login';
+    }
+    else if (prices.grandTotal <= 0) {
+      alert("Please enter a valid address");
+    }
 
+    else {
+      //first pay
+      const paymentResponse = await fetch('http://localhost:8084/payments/process', {
+
+      });
+
+
+
+      //add pending delivery
+      const deliveryResponse = await fetch('http://localhost:8083/deliveries/', {
+      })
     }
   }
 
@@ -209,7 +221,7 @@ export default function CartCheckout() {
                         />
                       </form>
 
-                      
+
 
                       <br />
                       <MDBTypography tag="h5" className="fw-bold mb-0">
