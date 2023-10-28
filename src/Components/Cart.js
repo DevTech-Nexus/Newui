@@ -171,10 +171,10 @@ export default function CartCheckout() {
         });
 
       const paypalLogin = await paymentResponse.text();
-      //redirect to reply2 link
-      window.open(paypalLogin, "_blank")
-
+      //redirect to reply2 lin
       console.log(paypalLogin);
+
+      window.open(paypalLogin, "_blank")
 
 
     }
