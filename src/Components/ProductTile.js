@@ -9,6 +9,8 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Cart from '../Models/CartObj.js';
+import CartItem from "../Models/CartItem.js";
 
 function ProductTile() {
 
@@ -32,19 +34,15 @@ function ProductTile() {
 
   const addToCart = () => {
     if(sessionStorage.getItem("cart") == null){
-      sessionStorage.setItem("cart", JSON.stringify([]));
+      sessionStorage.setItem("cart", new Cart());
     }
 
-    const cart = JSON.parse(sessionStorage.getItem("cart"));
-    const item = {
-      id: product.id,
-      name: product.productName,
-      price: product.price,
-      quantity: 1
-    }
-    cart.push(item);
-    sessionStorage.setItem("cart", JSON.stringify(cart));
+    const cart = sessionStorage.getItem("cart");
+    const item = new CartItem(product.id, product.productName, product.price, 1, product.imgUrl);
+    cart.addItem(item);
+    sessionStorage.setItem("cart", cart);
     setInfo({success: 'Added to cart'});
+    console.log(cart);
   }
 
 

@@ -13,6 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 import Button from 'react-bootstrap/Button';
 import './Styles.css';
+import Cart from '../Models/CartObj.js';
 
 export default function CartCheckout() {
 
