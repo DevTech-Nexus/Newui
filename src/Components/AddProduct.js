@@ -72,6 +72,19 @@ const ProductAddPage = () => {
     }
 
     const sendData = async () => {
+
+        console.log(
+            formData.productName,
+            formData.stockQuantity,
+            formData.category,
+            formData.brand,
+            formData.price,
+            formData.weight,
+            formData.imgUrl,
+            formData.dimensions,
+            formData.description
+        )
+
         const response = await fetch("http://localhost:8081/products/",
             {
                 method: "POST",
@@ -96,6 +109,7 @@ const ProductAddPage = () => {
             });
         const reply = await response.json();
         console.log(reply);
+        window.location.href = '/shop';
     }
 
     return (
@@ -118,7 +132,7 @@ const ProductAddPage = () => {
                     autoComplete="off"
                 >
                     <TextField id="outlined-basic" label="Product Name" variant="outlined" name='productName' required={true}  value={formData.productName} onChange={handleInputChange}/>
-                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stockQuantity' required={true} value={formData.stockQuantity} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stockQuantity' type='number' required={true} value={formData.stockQuantity} onChange={handleInputChange}/>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label" name="Category" required={true}>category</InputLabel>
                         <Select
@@ -126,6 +140,7 @@ const ProductAddPage = () => {
                             id="demo-simple-select"
                             value={formData.category}
                             label="category"
+                            name="category"
                             onChange={handleInputChange}
                         >
                             <MenuItem value={'high'}>high-end</MenuItem>
