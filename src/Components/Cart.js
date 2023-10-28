@@ -22,29 +22,15 @@ export default function CartCheckout() {
     address: '',
     city: ''
   });
-  const getItems = async () => {
-    const response = await fetch('http://localhost:8083/carts/', 
-    {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        credentials: 'include',
-        "Content-Type": "application/json;"
-      }
-    
-    });
-    const data = await response.json();
-    console.log(data);
-    setItems(data);
-    console.log(items);
+  const getItems = () => {
+    if (sessionStorage.getItem("cart") == null) {
+      sessionStorage.setItem("cart", JSON.stringify([]));
+    }
 
+    const cart = JSON.parse(sessionStorage.getItem("cart"));
+    setItems(cart);
   }
 
-  useEffect(() => {
-
-    getItems();
-  }
-    , []);
 
   const getDeliveryFee = async () => {
 

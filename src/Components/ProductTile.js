@@ -30,35 +30,23 @@ function ProductTile() {
     }
   }
 
-  const addToCart = async () => {
-
-    try {
-      const response = await fetch("http://localhost:8083/carts/", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          credentials: 'include',
-          "Content-Type": "application/json;"
-        },
-        body: `{
-          "id" : ${product.id},
-          "productName" : "${product.productName}",
-          "price" : ${product.price},
-          "currency" : "USD",
-          "quantity" : 1,
-          "imgUrl": "${product.imgUrl}"
-        }`
-      });
-
-      const data = await response.text();
-      console.log(data);
-      setInfo({ success: "successfully added!" });
-
-
-    } catch (err) {
-      console.error(err.message);
+  const addToCart = () => {
+    if(sessionStorage.getItem("cart") == null){
+      sessionStorage.setItem("cart", JSON.stringify([]));
     }
+
+    const cart = JSON.parse(sessionStorage.getItem("cart"));
+    const item = {
+      id: product.id,
+      name: product.productName,
+      price: product.price,
+      quantity: 1
+    }
+    cart.push(item);
+    sessionStorage.setItem("cart", JSON.stringify(cart));
   }
+
+
 
   useEffect(() => {
     getInfo();
@@ -133,10 +121,10 @@ function ProductTile() {
 
             )
             }
-            {info.success && <div style={{color: "blue", textAlign:"right"}}>{info.success}</div>}
+            {info.success && <div style={{ color: "blue", textAlign: "right" }}>{info.success}</div>}
           </div>
         </MDBCol>
-        
+
 
       </MDBRow><br></br>
     </MDBContainer>
