@@ -36,7 +36,10 @@ export default function CartCheckout() {
       totalPrice += cart[i].price;
     }
   }
-  
+
+  useEffect(() => {
+  setTotal(totalPrice.toFixed(2));
+  }, []);
 
   var extractedProducts = [];
   if (cart != null) {
@@ -62,6 +65,9 @@ export default function CartCheckout() {
     console.log(newCart);
 
     setProducts(newCart);
+
+    window.location.reload();
+    
   }
 
   const getDeliveryFee = async () => {
@@ -166,9 +172,10 @@ export default function CartCheckout() {
                       <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
                         Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
                       </Button>{' '}<br></br><br></br>
+                      <a href="/shop">
                       <Button variant="secondary" size="lg">
                         Keep shopping
-                      </Button>{' '}
+                      </Button>{' '}</a>
                     </center>
 
                   </MDBCol>
