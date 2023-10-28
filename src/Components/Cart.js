@@ -25,6 +25,8 @@ export default function CartCheckout() {
     city: ''
   });
 
+  const [address, setAddress] = useState('');
+
   const cart = JSON.parse(sessionStorage.getItem("cart"));
   console.log(cart);
 
@@ -71,14 +73,23 @@ export default function CartCheckout() {
   }
 
   const getDeliveryFee = async () => {
-
+      //talk to delivery and get distance to location
+      const response = await fetch("http://localhost:8083/deliveries/route?" + {address})
   }
 
   const checkout = async () => {
       //only allow  if logged in
       if(sessionStorage.getItem("user") != null) {
+        
+      }
+      else {
+        window.location.href = '/login';
 
       }
+  }
+
+  const handleInputChange = () => {
+    
   }
 
   useEffect(() => {
@@ -144,39 +155,46 @@ export default function CartCheckout() {
                       tag="h3"
                       className="mb-5 pt-2 text-center fw-bold text-uppercase"
                     >
-
+                      Payment
                     </MDBTypography>
 
 
                     <center>
 
-                      <form onSubmit={getDeliveryFee}>
+                      <form>
+                      <MDBTypography
+                      tag="h5"
+                      className="mb-5 pt-2 text-center"
+                    >
+                      Delivery information
+                    </MDBTypography>
+
                         <MDBInput
                           label="Address"
                           id="address"
                           type="text"
                           className="form-control"
+                          value={address}
+                          onChange={handleInputChange}
                           required
                         />
-                        <br />
-                        <MDBInput
-                          label="City"
-                          id="city"
-                          type="text"
-                          className="form-control"
-                          required
-                        />
-
                       </form>
 
                       <br />
                       <MDBTypography tag="h5" className="fw-bold mb-0">
-                        Total: USD {total}
+                        Total: USD {total} with delivery
                       </MDBTypography>
+                      <br/>
 
+                      <MDBTypography tag="h6" className="fw-muted mb-0">
+                        Deliveries take 3 - 5 business days
+                      </MDBTypography>
                       <br />
 
-                      <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
+
+                      <Button variant="primary" size="lg" 
+                      style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} 
+                      className="custom-button">
                         Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
                       </Button>{' '}<br></br><br></br>
                       <a href="/shop">
