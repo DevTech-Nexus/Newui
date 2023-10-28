@@ -12,9 +12,21 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import Button from 'react-bootstrap/Button';
-import './Styles.css'
+import './Styles.css';
 
 export default function CartCheckout() {
+
+  const [items, setItems] = React.useState([]);
+
+  const getItems = async() => {
+    const response = await fetch('http://localhost:8083/cart');
+    const data = await response.json();
+    items.map((item) => {
+      setItems(item);
+    })
+    return items;
+  }
+
     return (
       <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
         <MDBContainer className="h-100 py-5">

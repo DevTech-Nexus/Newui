@@ -73,8 +73,8 @@ export default function Navigationbar() {
               </Dropdown.Menu>
             </Dropdown>
 
-            {user != 'admin'? (
-              <a href='/Cart'>
+            {user != 'admin'?(
+              <a href='/cart'>
                 <img
                   className='cart'
                   src="https://th.bing.com/th/id/R.22a468f2a23252fe251834f6fa559645?rik=NMt%2fVFuJ%2fdJV2A&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2010%2f06%2fshopping-cart-icon-white_235863.png&ehk=iOQPHRjP2Yr4csqVdX6Bs7D8GFTrr2r9icBq9odkO7I%3d&risl=&pid=ImgRaw&r=0"

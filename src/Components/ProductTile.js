@@ -26,6 +26,32 @@ function ProductTile() {
     }
   }
 
+  const addToCart = async () => {
+
+    //check if cart is initialized first
+    try {
+      const response = await fetch("http://localhost:8083/carts/", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          "Content-Type": "application/json;"
+        },
+        body: `{
+          "id" : ${product.id},
+          "productName" : "${product.productName}",
+          "price" : ${product.price},
+          "currency" : "USD",
+          "quantity" : 1,
+          "imgUrl": "${product.imgUrl}"
+        }`
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
   useEffect(() => {
     getInfo();
   }, []);
@@ -88,14 +114,14 @@ function ProductTile() {
           <br />
           <div className="d-flex flex-column mt-4">
 
-            {product.stock_Quantity > 0? (
-              <MDBBtn outline color="primary" size="lg" className="mt-2">
+            {product.stock_Quantity > 0 ? (
+              <MDBBtn outline color="primary" size="lg" className="mt-2" onClick={addToCart}>
                 Add to cart
               </MDBBtn>
             ) : (
               <MDBBtn outline color="seconcary" size="lg" className="mt-2">
-              Out of Stock
-            </MDBBtn>
+                Out of Stock
+              </MDBBtn>
 
             )
             }
