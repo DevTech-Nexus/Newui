@@ -103,40 +103,79 @@ export default function CartCheckout() {
     if (sessionStorage.getItem("user") == null) {
       window.location.href = '/login';
     }
+    else if (extractedProducts.length == 0) {
+      alert("Please add items to cart");
+    }
     else if (prices.deliveryFee == 0) {
       alert("Please enter a valid address");
     }
 
     else {
 
-      //add every item to db
-      extractedProducts.map(async (product) => {
-        const response = await fetch('http://localhost:8082/deliveries/' , {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: `{
-              "userId" : "${sessionStorage.getItem("user")}",
-              "productId" : "${product.number}",
-              "price" : "${product.price}",
-              "quantity" : 1,
-              "address" : "${formData.address}",
-              "datetime" : "${new Date().toISOString().slice(0, 19).replace('T', ' ')}",
-              "status" : "PENDING",
-          }`
-          
-        })
-        const reply = await response.text();
-        console.log(reply);
+      //add every item to db          
+      const deliveryResponse = await fetch('http://localhost:8083/deliveries/', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          "Content-Type": "application/json"
+        },
+        body: `
+          {
+            "contents": [
 
+              ${cart.map(product => (
+          `{
+                  "itemid": ${product.id},
+                  "name": "${product.productName}",
+                  "price": ${product.price}
+                }`
+        )).join(',')
+          }
+            ],
+            "userId": "${sessionStorage.getItem("user")}",
+            "address": "${formData.address}",
+            "datetime": "${new Date().getTime()}",
+            "status": "PENDING"
+          }
+          
+        `
       });
+
+      const reply = deliveryResponse.json()
+        .then(data => {
+          console.log(data);
+          sessionStorage.setItem("deliveryId", data.id);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
 
       // pay
-      const paymentResponse = await fetch('http://localhost:8084/payments/process', {
+      const paymentResponse = await fetch('http://localhost:8084/payments/process',
+        {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json;"
+          },
+          body: `{
+            "oid" : "${sessionStorage.getItem("deliveryId")}",
+            "user" : "${sessionStorage.getItem("user")}",
+            "price" : ${prices.grandTotal.toFixed(2)},
+            "currency" : "USD",
+            "method" : "paypal",
+            "intent": "sale",
+            "description" : "mobile purchase"
+        }`
+        });
 
-      });
+      const paypalLogin = await paymentResponse.text();
+      //redirect to reply2 link
+      window.open(paypalLogin, "_blank")
+
+      console.log(paypalLogin);
+
 
     }
   }
@@ -265,6 +304,7 @@ export default function CartCheckout() {
 
 
                       <Button variant="primary" size="lg"
+                        onClick={() => checkout()}
                         style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }}
                         className="custom-button">
                         Checkout With PayPal <img src="./paypal-icon.svg" style={{ width: '20px' }} />
