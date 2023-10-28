@@ -9,14 +9,16 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Cart from '../Models/CartObj.js';
-import CartItem from "../Models/CartItem.js";
+
+
 
 function ProductTile() {
 
   const { id } = useParams();
 
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState([]);
+
+  const [cart, setCart] = useState(sessionStorage.getItem("cart") || []);
 
   const [info, setInfo] = useState({
     success: ''
@@ -27,33 +29,28 @@ function ProductTile() {
       const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`);
       const data = await response.json();
       setProduct(data);
+      console.log(data);
     } catch (err) {
       console.error(err.message);
     }
   }
 
   const addToCart = () => {
-    if(sessionStorage.getItem("cart") == null){
-      sessionStorage.setItem("cart", new Cart());
+    let cart = sessionStorage.getItem("cart");
+    if (cart === null) {
+      cart = [];
+    } else {
+      cart = JSON.parse(cart);
     }
-
-    const cart = sessionStorage.getItem("cart");
-    const item = new CartItem(product.id, product.productName, product.price, 1, product.imgUrl);
-    cart.addItem(item);
-    sessionStorage.setItem("cart", cart);
-    setInfo({success: 'Added to cart'});
+    cart.push(product);
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    setInfo({ success: 'Added to cart' });
     console.log(cart);
   }
-
-
 
   useEffect(() => {
     getInfo();
   }, []);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
 
   return (
 

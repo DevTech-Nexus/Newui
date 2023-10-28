@@ -13,22 +13,50 @@ import {
 } from "mdb-react-ui-kit";
 import Button from 'react-bootstrap/Button';
 import './Styles.css';
-import Cart from '../Models/CartObj.js';
 
 export default function CartCheckout() {
 
-  const [cart, setCart] = useState(sessionStorage.getItem("cart") );
+  const [products, setProducts] = useState([]);
+
+  const [total, setTotal] = useState(0);
 
   const [errors, setErrors] = useState({
     address: '',
     city: ''
   });
 
+  const cart = JSON.parse(sessionStorage.getItem("cart"));
   console.log(cart);
+
+  //calculate total price
+  var totalPrice = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    totalPrice += cart[i].price;
+  }
+
+  //separate each item into an array
+  const extractedProducts = cart.map(product => {
+    return JSON.stringify({
+      productName: product.productName,
+      stockQuantity: product.stock_Quantity,
+      imgUrl: product.imgUrl,
+      price: product.price
+    });
+  });
 
   const getDeliveryFee = async () => {
 
   }
+
+  useEffect(() => {
+  setProducts(extractedProducts);
+  setTotal(totalPrice);
+  console.log("products" + products);
+  console.log("total:" + totalPrice);
+
+  }, []);
+  
 
   return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
@@ -115,7 +143,7 @@ export default function CartCheckout() {
 
                       <br />
                       <MDBTypography tag="h5" className="fw-bold mb-0">
-                        Total: 2261$
+                        Total: USD {total}
                       </MDBTypography>
 
                       <br />
