@@ -16,6 +16,10 @@ function ProductTile() {
 
   const [product, setProduct] = useState(null);
 
+  const [info, setInfo] = useState({
+    success: ''
+  });
+
   const getInfo = async () => {
     try {
       const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`);
@@ -28,12 +32,12 @@ function ProductTile() {
 
   const addToCart = async () => {
 
-    //check if cart is initialized first
     try {
       const response = await fetch("http://localhost:8083/carts/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
+          credentials: 'include',
           "Content-Type": "application/json;"
         },
         body: `{
@@ -45,8 +49,12 @@ function ProductTile() {
           "imgUrl": "${product.imgUrl}"
         }`
       });
-      const data = await response.json();
+
+      const data = await response.text();
       console.log(data);
+      setInfo({ success: "successfully added!" });
+
+
     } catch (err) {
       console.error(err.message);
     }
@@ -125,8 +133,10 @@ function ProductTile() {
 
             )
             }
+            {info.success && <div style={{color: "blue", textAlign:"right"}}>{info.success}</div>}
           </div>
         </MDBCol>
+        
 
       </MDBRow><br></br>
     </MDBContainer>
