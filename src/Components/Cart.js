@@ -103,21 +103,41 @@ export default function CartCheckout() {
     if (sessionStorage.getItem("user") == null) {
       window.location.href = '/login';
     }
-    else if (prices.grandTotal <= 0) {
+    else if (prices.deliveryFee == 0) {
       alert("Please enter a valid address");
     }
 
     else {
-      //first pay
+
+      //add every item to db
+      extractedProducts.map(async (product) => {
+        const response = await fetch('http://localhost:8082/deliveries/' , {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: `{
+              "userId" : "${sessionStorage.getItem("user")}",
+              "productId" : "${product.number}",
+              "price" : "${product.price}",
+              "quantity" : 1,
+              "address" : "${formData.address}",
+              "datetime" : "${new Date().toISOString().slice(0, 19).replace('T', ' ')}",
+              "status" : "PENDING",
+          }`
+          
+        })
+        const reply = await response.text();
+        console.log(reply);
+
+      });
+
+      // pay
       const paymentResponse = await fetch('http://localhost:8084/payments/process', {
 
       });
 
-
-
-      //add pending delivery
-      const deliveryResponse = await fetch('http://localhost:8083/deliveries/', {
-      })
     }
   }
 
