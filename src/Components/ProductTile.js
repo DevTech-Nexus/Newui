@@ -26,7 +26,7 @@ function ProductTile() {
 
   const getInfo = async () => {
     try {
-      const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`);
+      const response = await fetch(`http://localhost:8081/products/${id}`);
       const data = await response.json();
       setProduct(data);
       console.log(data);

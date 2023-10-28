@@ -18,7 +18,7 @@ export default function Shop() {
 
   const getProducts = async () => {
     try {
-      const response = await fetch('https://expertmobile-productservice.azurewebsites.net/products/');
+      const response = await fetch('http://localhost:8081/products/');
       products = await response.json();
       console.log(products);
       setProducts(products);
@@ -34,7 +34,7 @@ export default function Shop() {
     var result = window.confirm("Are you sure you want to delete this product?");
     if (result) {
       try {
-        const response = await fetch(`https://expertmobile-productservice.azurewebsites.net/products/${id}`, {
+        const response = await fetch(`http://localhost:8081/products/${id}`, {
           method: 'DELETE'
         });
         products = await response.json();

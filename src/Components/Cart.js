@@ -74,6 +74,13 @@ export default function CartCheckout() {
 
   }
 
+  const checkout = async () => {
+      //only allow  if logged in
+      if(sessionStorage.getItem("user") != null) {
+
+      }
+  }
+
   useEffect(() => {
     setProducts(extractedProducts);
     setTotal(totalPrice);
@@ -187,4 +194,5 @@ export default function CartCheckout() {
       </MDBContainer>
     </section>
   );
-}
+                    }
+                    

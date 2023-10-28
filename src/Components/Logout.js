@@ -3,7 +3,7 @@ export default function Logout() {
     sessionStorage.removeItem('user');
     const logout = async () => {
         try {
-            const response = await fetch("https://expertmobile-userservice.azurewebsites.net/users/logout", 
+            const response = await fetch("http://localhost/users/logout", 
             {
                 method: "POST",
                 headers: {

@@ -72,7 +72,7 @@ const ProductAddPage = () => {
     }
 
     const sendData = async () => {
-        const response = await fetch("https://expertmobile-productservice.azurewebsites.net/products/",
+        const response = await fetch("http://localhost:8081/products/",
             {
                 method: "POST",
                 headers: {
