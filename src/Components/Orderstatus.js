@@ -10,18 +10,31 @@ export default function User() {
 
 
   const getDeliveries = async () => {
-    const response = await fetch('http://localhost:8083/deliveries/' + (sessionStorage.getItem("user") ? sessionStorage.getItem("user") : null))
+    if (sessionStorage.getItem("user") != "admin") {
+      const response = await fetch('http://localhost:8083/deliveries/' + (sessionStorage.getItem("user") ? sessionStorage.getItem("user") : null))
 
-    const reply = await response.json();
-    setDeliveries(reply);
-    console.log(deliveries);
+      const reply = await response.json();
+      setDeliveries(reply);
+      console.log(deliveries);
+    }
+    else{
+      const response = await fetch('http://localhost:8083/deliveries/')
+
+      const reply = await response.json();
+      setDeliveries(reply);
+      console.log(deliveries);
+
+    }
   }
+
+
 
   useEffect(() => {
     getDeliveries();
   }, []);
 
   return (
+
 
 
     <div>
@@ -34,7 +47,9 @@ export default function User() {
                 borderRadius: '10px',
               }}>
                 <div class="card-header px-4 py-5">
-                  <h5 class="text-muted mb-0">Thanks for your Order, <span style={{ color: '#a8729a', }}>{sessionStorage.getItem("user")}</span>!</h5>
+                  <h5 class="text-muted mb-0">
+                    {sessionStorage.getItem("user") == "admin" ? "All Orders" : "Your Orders"}
+                    <span style={{ color: '#a8729a', }}>{sessionStorage.getItem("user") != "admin"? sessionStorage.getItem("user") :null}</span></h5>
                 </div>
                 {deliveries.map(delivery => (
                   <div class="card-body p-4">
@@ -48,12 +63,12 @@ export default function User() {
                         </div>
                         <div class="row d-flex align-items-center">
                           <div class="col-md-2">
-                            
+
                           </div>
                           <div class="col-md-10">
-                          
+
                             <div class="d-flex justify-content-around mb-1">
-                            status: {delivery.status}
+                              status: {delivery.status}
                               <p class="text-muted mt-1 mb-0 small ms-xl-5">{delivery.address}</p>
                             </div>
                           </div>
