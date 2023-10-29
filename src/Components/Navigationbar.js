@@ -41,18 +41,8 @@ export default function Navigationbar() {
               <Nav.Link className='Links' style={{ color: '#FFFFFF' }} href="/about">About</Nav.Link>
             </Nav>
 
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-
             {/* Add user dropdown menu with custom CSS */}
-            <Dropdown align="end" style={{ marginLeft: '10px' }}>
+            <Dropdown align="end" style={{ marginLeft: '0px' }}>
               <Dropdown.Toggle variant="secondary" id="user-dropdown">
                 {user == null ? (<div>{'User'}</div>) : (<div>{user}</div>)}
               </Dropdown.Toggle>

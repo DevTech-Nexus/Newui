@@ -85,7 +85,7 @@ export default function Update() {
     if (Object.keys(validationErrors).length === 0) {
       // Add your logic here, e.g., send the form data to a server
       push(sessionStorage.getItem("user"), formData.currentpassword, formData.newpassword)
-
+      window.location.href = '/';
     }
   };
 
@@ -154,7 +154,7 @@ export default function Update() {
 
 
 
-              <a href='/Register'><Button
+              <Button
                 variant="primary"
                 size="lg"
                 type="submit"
@@ -169,7 +169,7 @@ export default function Update() {
               // Add type="submit" to the button
               >
                 Update
-              </Button></a>
+              </Button>
             </form>
 
 

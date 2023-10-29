@@ -35,7 +35,16 @@ function ProductTile() {
     }
   }
 
-  const addToCart = () => {
+  const addToCart = async () => {
+    product.stock_Quantity--;
+
+    //update product controller too
+    const update = await fetch(`http://localhost:8081/products/decrement/${product.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(product)
+    });
+
     let cart = sessionStorage.getItem("cart");
     let uniqId = sessionStorage.getItem("uniqId");
     if (uniqId === null) {
@@ -58,13 +67,15 @@ function ProductTile() {
       imgUrl: product.imgUrl,
       price: product.price,
       stock_Quantity: product.stock_Quantity
-      
+
     });
     uniqId++;
     sessionStorage.setItem("uniqId", uniqId);
     sessionStorage.setItem("cart", JSON.stringify(cart));
     setInfo({ success: 'Added to cart' });
     console.log(cart);
+
+
   }
 
   useEffect(() => {

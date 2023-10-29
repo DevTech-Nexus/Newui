@@ -62,17 +62,30 @@ export default function CartCheckout() {
     });
   }
 
-  const removeFromCart = (id) => {
+  const removeFromCart = async (id, number) => {
     //find item and then remove it
     console.log("id:" + id)
     console.log("hit");
     let newCart = cart.filter(product => product.uniqId !== id);
     sessionStorage.setItem("cart", JSON.stringify(newCart));
     console.log(newCart);
+    //update product controller stock as well
+
+    const update = await fetch(`http://localhost:8081/products/increment/${number}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify("")
+    });
+
+    const reply = await update.text();
+    console.log(reply);
+
 
     setProducts(newCart);
 
     window.location.reload();
+
+
 
   }
 
@@ -174,7 +187,7 @@ export default function CartCheckout() {
       //redirect to reply2 lin
       console.log(paypalLogin);
 
-      window.open(paypalLogin, "_blank")
+      window.location.href = paypalLogin;
 
 
     }
@@ -242,7 +255,7 @@ export default function CartCheckout() {
                             <p className="fw-bold mb-0 me-5 pe-3">USD {product.price}</p>
                           </div>
 
-                          <Button variant="tertiary" onClick={() => removeFromCart(product.uniqId)}> remove </Button>
+                          <Button variant="tertiary" onClick={() => removeFromCart(product.uniqId, product.number)}> remove </Button>
 
                         </div>
                       </div>
