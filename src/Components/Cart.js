@@ -187,6 +187,9 @@ export default function CartCheckout() {
       //redirect to reply2 lin
       console.log(paypalLogin);
 
+      //clear cart
+      sessionStorage.setItem("cart", JSON.stringify([]));
+
       window.location.href = paypalLogin;
 
 

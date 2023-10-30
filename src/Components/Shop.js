@@ -47,9 +47,16 @@ export default function Shop() {
       window.location.reload();
     }
 
-    
-    
   }
+
+  
+
+  const handleUpdate = async (id) => {
+      
+    window.location.href = '/edit/' + id;
+
+  }
+
 
   useEffect(() => {
     getProducts(); // Call the function inside useEffect
@@ -105,6 +112,8 @@ export default function Shop() {
                   USD {product.price}
                 </Card.Text>
 
+          
+            
                 <a href={'product/' + product.id}>
                   <Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
                     More Info
@@ -119,6 +128,10 @@ export default function Shop() {
                         <Button variant="secondary" size="sm" >
                           Edit
                         </Button>{' '}</a> */}
+
+                      <Button variant="secondary" size="sm" onClick={() => handleUpdate(product.id)}>
+                        Update
+                      </Button>
 
                       <Button variant="secondary" size="sm" onClick={() => handleDelete(product.id)}>
                         Delete

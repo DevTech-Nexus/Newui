@@ -136,7 +136,7 @@ function ProductTile() {
           <br />
           <div className="d-flex flex-column mt-4">
 
-            {product.stock_Quantity > 0 ? (
+            {product.stock_Quantity > 0? (
               <MDBBtn outline color="primary" size="lg" className="mt-2" onClick={addToCart}>
                 Add to cart
               </MDBBtn>

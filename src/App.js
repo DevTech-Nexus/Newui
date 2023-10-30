@@ -16,6 +16,7 @@ import Update from './Components/Update';
 import Logout from './Components/Logout';
 import ProductTile from './Components/ProductTile';
 import ProductAddPage from './Components/AddProduct';
+import ProductUpdatePage from './Components/UpdateProduct';
 function App() {
 
   return (
@@ -44,7 +45,7 @@ function App() {
           <Route  path='/logout' element={<Logout />}></Route>
           <Route  path='/product/:id' element={<ProductTile />}></Route>
           <Route  path='/new' element={<ProductAddPage />}></Route>
-          <Route  path='/edit/:id' element={<ProductTile />}></Route>
+          <Route  path='/edit/:id' element={<ProductUpdatePage />}></Route>
           <Route  path='/delete/:id' element={<ProductTile />}></Route>
         </Routes>
         <Foot />

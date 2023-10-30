@@ -13,28 +13,40 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
-import React from "react";
+import React, { useEffect } from "react";
 import './Styles.css';
 import { Button } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
 
-const ProductAddPage = () => {
+const ProductUpdatePage = () => {
+
+    const { id } = useParams();
 
     const [formData, setFormData] = React.useState({
+        id: 0,
         productName: '',
-        stockQuantity: '',
+        stock_Quantity: 0,
         category: '',
         brand: '',
-        price: '',
-        weight: '',
+        price: 0,
+        weight: 0,
         imgUrl: '',
         dimensions: '',
         description: '',
     });
 
+    console.log(formData.id);
+    const getData = async () => {
+        const response = await fetch("http://localhost:8081/products/" + id);
+        const data = await response.json();
+        console.log(data);
+        setFormData(data);
+    }
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-      };
+    };
 
     const [errors, setErrors] = React.useState({
         productName: '',
@@ -48,7 +60,13 @@ const ProductAddPage = () => {
         description: '',
     });
 
-    const handleSubmit = () => {
+    useEffect(() => {
+        getData();
+    }, []);
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
         console.log(
             formData.productName,
             formData.stockQuantity,
@@ -62,10 +80,10 @@ const ProductAddPage = () => {
         )
 
         //check for nulls
-        if(formData.productName !== null && formData.stockQuantity !== null && formData.category !== null && formData.brand !== null && formData.price !== null && formData.weight !== null && formData.imgUrl !== null && formData.dimensions !== null && formData.description !== null){
+        if (formData.productName !== null && formData.stockQuantity !== null && formData.category !== null && formData.brand !== null && formData.price !== null && formData.weight !== null && formData.imgUrl !== null && formData.dimensions !== null && formData.description !== null) {
             sendData();
         }
-        else{
+        else {
             alert('Please fill in all fields');
         }
     }
@@ -86,14 +104,16 @@ const ProductAddPage = () => {
 
         const response = await fetch("http://localhost:8081/products/",
             {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     'Accept': 'application/json',
                     "Content-Type": "application/json;"
                 },
                 body: `{
+
+                    "id": ${id},
                     "productName": "${formData.productName}",
-                    "stock_Quantity": ${formData.stockQuantity},
+                    "stock_Quantity": ${formData.stock_Quantity},
                     "category": "${formData.category}",
                     "brand": "${formData.brand}",
                     "price": ${formData.price},
@@ -101,7 +121,8 @@ const ProductAddPage = () => {
                     "imgUrl": "${formData.imgUrl}",
                     "dimensions": "${formData.dimensions}",
                     "description": "${formData.description}",
-                    "currency" : "USD"  
+                    "currency" : "USD"
+                    
                 }`
 
             });
@@ -129,8 +150,8 @@ const ProductAddPage = () => {
                     noValidate
                     autoComplete="off"
                 >
-                    <TextField id="outlined-basic" label="Product Name" variant="outlined" name='productName' required={true}  value={formData.productName} onChange={handleInputChange}/>
-                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stockQuantity' type='number' required={true} value={formData.stockQuantity} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="Product Name" variant="outlined" name='productName' required={true} value={formData.productName} onChange={handleInputChange} />
+                    <TextField id="outlined-basic" label="Stock Quantity" variant="outlined" name='stock_Quantity' type='number' required={true} value={formData.stock_Quantity} onChange={handleInputChange} />
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label" name="Category" required={true}>category</InputLabel>
                         <Select
@@ -146,14 +167,14 @@ const ProductAddPage = () => {
                             <MenuItem value={'low'}>low budget</MenuItem>
                         </Select>
                     </FormControl>
-                    <TextField id="outlined-basic" label="Brand" variant="outlined" name='brand' required={true} value={formData.brand} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="Brand" variant="outlined" name='brand' required={true} value={formData.brand} onChange={handleInputChange} />
 
 
-                    <TextField id="outlined-basic" label="price" variant="outlined" name='price' type='number' required={true} value={formData.price} onChange={handleInputChange}/>
-                    <TextField id="outlined-basic" label="weight" variant="outlined" name='weight' type='number' required={true} value={formData.weight} onChange={handleInputChange}/>
-                    <TextField id="outlined-basic" label="image URL" variant="outlined" name='imgUrl' required={true} value={formData.imgUrl} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="price" variant="outlined" name='price' type='number' required={true} value={formData.price} onChange={handleInputChange} />
+                    <TextField id="outlined-basic" label="weight" variant="outlined" name='weight' type='number' required={true} value={formData.weight} onChange={handleInputChange} />
+                    <TextField id="outlined-basic" label="image URL" variant="outlined" name='imgUrl' required={true} value={formData.imgUrl} onChange={handleInputChange} />
 
-                    <TextField id="outlined-basic" label="dimensions" variant="outlined" name="dimensions" required={true} value={formData.dimensions} onChange={handleInputChange}/>
+                    <TextField id="outlined-basic" label="dimensions" variant="outlined" name="dimensions" required={true} value={formData.dimensions} onChange={handleInputChange} />
                     <TextField
                         id="outlined-multiline-static"
                         label="Description"
@@ -167,10 +188,10 @@ const ProductAddPage = () => {
 
                 </Box><br></br>
 
-                <Button variant='primary' type="submit" className='custom-button8' >Add Phone</Button>
+                <Button variant='primary' type="submit" className='custom-button8' >Edit Phone</Button>
             </form></center><br></br>
         </div>
     );
 };
 
-export default ProductAddPage;
+export default ProductUpdatePage;

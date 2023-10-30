@@ -22,35 +22,37 @@ export default function Home() {
         <Carousel.Item>
           <img
             className="d-block w-100"
+            style={{ height: '100vh'}}
             src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-model-unselect-gallery-1-202309?wid=5120&amp;hei=2880&amp;fmt=p-jpg&amp;qlt=80&amp;.v=1692810665888"
             alt="First slide"
           />
           <Carousel.Caption>
-            <h5>First slide label</h5>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h5>Expert Mobile</h5>
+            <p>The best place for awesome offers</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-model-unselect-gallery-1-202309?wid=5120&amp;hei=2880&amp;fmt=p-jpg&amp;qlt=80&amp;.v=1692810665888"
+            style={{ height: '100vh'}}
+            src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Second slide"
           />
           <Carousel.Caption>
-            <h5>Second slide label</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h5>New Arrival </h5>
+            <p></p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-model-unselect-gallery-1-202309?wid=5120&amp;hei=2880&amp;fmt=p-jpg&amp;qlt=80&amp;.v=1692810665888"
+            style={{ height: '100vh', objectFit: 'fill'}}
+            src="https://images.unsplash.com/photo-1585399000684-d2f72660f092?auto=format&fit=crop&q=80&w=1742&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Third slide"
           />
           <Carousel.Caption>
-            <h5>Third slide label</h5>
+            <h5></h5>
             <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
             </p>
           </Carousel.Caption>
         </Carousel.Item>
@@ -68,9 +70,7 @@ export default function Home() {
             </br> <p className="sub2">Unfold an immersive entertainment experience with a massive 7.6" screen.
               Get a free storage upgrade with select Galaxy Z Fold5. Enjoy 512GB at the price of 256GB.ΩK Plus, get up to $1,200 instant trade-in credit.θ
               </p>
-              <br></br><Button variant="primary" size="lg" style={{ background: 'linear-gradient(to right, rgba(101, 126, 234, 0.9), rgba(118, 75, 162, 0.9))' }} className="custom-button">
-                Buy Now
-              </Button>{' '}
+              <br></br>
 
             </Col>
           </Row>
